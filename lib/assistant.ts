@@ -1,6 +1,7 @@
 import "server-only";
 import { sql } from "@/lib/db";
 import {
+  dayKey,
   fmtDate,
   fmtDateTime,
   fmtFee,
@@ -288,7 +289,7 @@ export async function ask(question: string): Promise<AssistantReply> {
 
   /* -- fests -------------------------------------------------------------- */
   if (has("fest", "festival", "carnival", "sprint", "circuit")) {
-    const fests = await sql<{ name: string; slug: string; start_date: string; end_date: string; n: number }[]>`
+    const fests = await sql<{ name: string; slug: string; start_date: string | Date; end_date: string | Date; n: number }[]>`
       select f.name, f.slug, f.start_date, f.end_date,
              (select count(*) from events e where e.fest_id = f.id and e.status != 'draft')::int as n
       from fests f where f.status = 'published' order by f.start_date desc
@@ -298,7 +299,7 @@ export async function ask(question: string): Promise<AssistantReply> {
       items: fests.map((f) => ({
         title: f.name,
         href: `/fests/${f.slug}`,
-        meta: `${fmtDate(f.start_date + "T00:00:00Z")} · ${f.n} events`,
+        meta: `${fmtDate(dayKey(f.start_date) + "T00:00:00Z")} · ${f.n} events`,
       })),
     };
   }

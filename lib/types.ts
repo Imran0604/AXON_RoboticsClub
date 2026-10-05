@@ -44,8 +44,13 @@ export interface Fest {
   slug: string;
   tagline: string | null;
   description: string | null;
-  start_date: string;
-  end_date: string;
+  /**
+   * Postgres `date` columns arrive from postgres.js as Date objects, not
+   * strings. The type says so explicitly — an earlier version claimed `string`
+   * and every date comparison silently became NaN.
+   */
+  start_date: string | Date;
+  end_date: string | Date;
   venue: string | null;
   art_seed: number;
   status: "draft" | "published";
@@ -115,13 +120,44 @@ export interface Registration {
 /* Derived lifecycle state                                                    */
 /* ------------------------------------------------------------------------- */
 
+const DHAKA = "Asia/Dhaka";
+
 export type FestPhase = "upcoming" | "ongoing" | "past";
+
+/**
+ * Normalises a `date` column to a plain YYYY-MM-DD key.
+ *
+ * postgres.js hands back a Date for `date` columns, parsed at local midnight.
+ * Reading the local calendar components (rather than toISOString) avoids
+ * shifting the day backwards for anyone east of UTC — which includes everyone
+ * actually using this.
+ */
+export function dayKey(value: string | Date): string {
+  if (value instanceof Date) {
+    const y = value.getFullYear();
+    const m = String(value.getMonth() + 1).padStart(2, "0");
+    const d = String(value.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  }
+  return String(value).slice(0, 10);
+}
+
+/** Today's calendar date in the club's timezone, as YYYY-MM-DD. */
+export function todayKey(now = new Date()): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: DHAKA,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(now);
+}
 
 export function festPhase(fest: Pick<Fest, "start_date" | "end_date">, now = new Date()): FestPhase {
   // Compare on calendar days: a fest ending today is still "ongoing" all day.
-  const today = now.toISOString().slice(0, 10);
-  if (today < fest.start_date) return "upcoming";
-  if (today > fest.end_date) return "past";
+  // Both sides go through dayKey so this is always string-to-string.
+  const today = todayKey(now);
+  if (today < dayKey(fest.start_date)) return "upcoming";
+  if (today > dayKey(fest.end_date)) return "past";
   return "ongoing";
 }
 
@@ -208,7 +244,6 @@ export const CATEGORIES = [
 /* Formatting                                                                 */
 /* ------------------------------------------------------------------------- */
 
-const DHAKA = "Asia/Dhaka";
 
 export function fmtDateTime(d: Date | string): string {
   return new Date(d).toLocaleString("en-GB", {
@@ -240,9 +275,10 @@ export function fmtTime(d: Date | string): string {
   });
 }
 
-export function fmtDateRange(start: string, end: string): string {
-  const s = new Date(start + "T00:00:00Z");
-  const e = new Date(end + "T00:00:00Z");
+export function fmtDateRange(start: string | Date, end: string | Date): string {
+  // Build from the normalised key so a Date and a string render identically.
+  const s = new Date(dayKey(start) + "T00:00:00Z");
+  const e = new Date(dayKey(end) + "T00:00:00Z");
   const sameMonth = s.getUTCMonth() === e.getUTCMonth() && s.getUTCFullYear() === e.getUTCFullYear();
   const opts: Intl.DateTimeFormatOptions = { day: "numeric", month: "short", timeZone: "UTC" };
   if (sameMonth) {

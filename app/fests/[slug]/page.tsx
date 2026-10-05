@@ -6,6 +6,7 @@ import { EventCardTile } from "@/components/EventCard";
 import { Empty } from "@/components/Empty";
 import { getEventsForFest, getFestBySlug } from "@/lib/queries";
 import {
+  dayKey,
   FEST_PHASE_LABEL,
   FEST_PHASE_TONE,
   festPhase,
@@ -38,7 +39,7 @@ export default async function FestPage({ params }: PageProps<"/fests/[slug]">) {
   // plans a festival visit.
   const byDay = new Map<string, typeof events>();
   for (const e of events) {
-    const key = new Date(e.starts_at).toISOString().slice(0, 10);
+    const key = dayKey(new Date(e.starts_at));
     if (!byDay.has(key)) byDay.set(key, []);
     byDay.get(key)!.push(e);
   }

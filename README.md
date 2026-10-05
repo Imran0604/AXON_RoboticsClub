@@ -209,20 +209,22 @@ Disclosed in full, as the rules require.
 
 ## 10. Screenshots
 
-| | |
-|---|---|
-| Home | `docs/screenshots/01-home.png` |
-| Fest directory | `docs/screenshots/02-fests.png` |
-| Event directory with filters | `docs/screenshots/03-events-filtered.png` |
-| Event detail | `docs/screenshots/04-event-detail.png` |
-| Registration form | `docs/screenshots/05-register.png` |
-| QR ticket | `docs/screenshots/06-ticket.png` |
-| Mission Control dashboard | `docs/screenshots/07-admin-dashboard.png` |
-| Participants table | `docs/screenshots/08-admin-participants.png` |
-| Form builder | `docs/screenshots/09-form-builder.png` |
-| Check-in scanner | `docs/screenshots/10-scanner.png` |
-| Mobile views | `docs/screenshots/11-mobile.png` |
-| Dark mode | `docs/screenshots/12-dark-mode.png` |
+Screenshots live in `docs/screenshots/`. Capture these twelve to cover every scored area:
+
+| # | View | Route |
+|---|---|---|
+| 01 | Home | `/` |
+| 02 | Fest directory, grouped by status | `/fests` |
+| 03 | Event directory with filters applied | `/events?category=Hardware&fee=free` |
+| 04 | Event detail with capacity and countdown | `/events/line-follower-championship` |
+| 05 | Registration form (organiser-defined fields) | `/events/robosoccer-5v5/register` |
+| 06 | QR ticket | `/tickets/<code>` |
+| 07 | Mission Control dashboard | `/admin` |
+| 08 | Participants table with a filter | `/admin/registrations?status=waitlisted` |
+| 09 | Registration form builder | `/admin/events/<id>` |
+| 10 | Check-in scanner | `/admin/scan` |
+| 11 | Mobile layout (375px wide) | `/events` and `/admin/registrations` |
+| 12 | Dark mode | any route, theme toggle set to dark |
 
 ## 11. Known limitations
 

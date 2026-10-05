@@ -38,11 +38,11 @@
   --brass-soft: #f3eada;
 
   /* semantic state — deliberately separate from the brand accent */
-  --ok: #16694a;
+  --ok: #0f6b45;
   --ok-soft: #dcede4;
-  --warn: #8a5a0c;
+  --warn: #946800;
   --warn-soft: #f7ebd5;
-  --crit: #9b2a23;
+  --crit: #ae1f14;
   --crit-soft: #f7e1df;
   --info: #1b5a86;
   --info-soft: #dfecf5;
@@ -78,11 +78,11 @@
     --brass: #d8a850;
     --brass-soft: #28210f;
 
-    --ok: #4fc08d;
+    --ok: #3fbe86;
     --ok-soft: #11291f;
-    --warn: #daa63f;
+    --warn: #d8a22b;
     --warn-soft: #292009;
-    --crit: #e4786e;
+    --crit: #f0665a;
     --crit-soft: #2c1715;
     --info: #68aedc;
     --info-soft: #0f2330;
@@ -114,11 +114,11 @@
   --brass: #d8a850;
   --brass-soft: #28210f;
 
-  --ok: #4fc08d;
+  --ok: #3fbe86;
   --ok-soft: #11291f;
-  --warn: #daa63f;
+  --warn: #d8a22b;
   --warn-soft: #292009;
-  --crit: #e4786e;
+  --crit: #f0665a;
   --crit-soft: #2c1715;
   --info: #68aedc;
   --info-soft: #0f2330;

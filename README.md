@@ -283,10 +283,15 @@ particle field with an orbital system — all drawn on canvas, with no hero imag
 
 ### Responsive and theming
 
-| Mobile — events | Mobile — admin | Light theme |
-|---|---|---|
-| ![Mobile events](docs/screenshots/13-mobile-events.png) | ![Mobile admin](docs/screenshots/14-mobile-admin.png) | ![Light theme](docs/screenshots/15-light-theme.png) |
-| 390px wide. | The participants table becomes cards under 768px. | Dark is the default; light is an opt-in on the toggle. |
+| Mobile — events | Mobile — admin |
+|---|---|
+| ![Mobile events](docs/screenshots/13-mobile-events.png) | ![Mobile admin](docs/screenshots/14-mobile-admin.png) |
+| 390px wide. | The participants table becomes cards under 768px. |
+
+| Mobile menu | Light theme |
+|---|---|
+| ![Mobile menu](docs/screenshots/16-mobile-menu.png) | ![Light theme](docs/screenshots/15-light-theme.png) |
+| Full-height drawer, portalled out of the header so a backdrop-filter cannot trap it. | Dark is the default; light is an opt-in on the toggle. |
 
 ### Reviewer guide
 

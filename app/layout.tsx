@@ -4,6 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Logo } from "@/components/Logo";
+import { Assistant } from "@/components/Assistant";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -131,6 +132,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </div>
           </div>
         </footer>
+
+        <Assistant />
       </body>
     </html>
   );

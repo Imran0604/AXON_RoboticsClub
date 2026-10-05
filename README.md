@@ -97,11 +97,20 @@ locks the event row, so two people racing for the last seat cannot both win it.
   event.
 - **Audit log** of every privileged mutation with its actor and timestamp.
 
+### Event assistant
+- A floating assistant answers questions about **dates, fees, deadlines, seats left, team sizes,
+  prizes, categories, festivals and how to register**, reading live rows rather than a canned script.
+- Deterministic by design — see the AI disclosure below. It is labelled in the UI as not being a
+  language model.
+
 ### Throughout
-- **Dark-first design** in warm graphite and molten orange, with a light theme available from the
+- **Dark-first design** in near-black azure with a light theme available from the
   toggle. Dark is the unconditional default rather than inferred from the OS — a deliberate choice,
   so the identity is the same for everyone — and there is no flash on load.
 - **Fully responsive**, including the admin: the participants table becomes cards under 768px.
+- **Animated hero** — an ambient particle field and an orbital system drawn on canvas, plus a
+  typed subheading. All three honour `prefers-reduced-motion`, pause when scrolled out of view, and
+  cap device pixel ratio, so they cost almost nothing on a phone.
 - **Generated SVG artwork** — all 16 event posters and 4 fest banners are drawn deterministically
   from each record's art seed and category, in eight motifs drawn from each discipline's visual
   vocabulary. About 2KB each, theme-aware, and no image requests at all.
@@ -219,10 +228,16 @@ Disclosed in full, as the rules require.
 
 **AI features inside the product**
 
-- **None, deliberately.** The project uses no LLM at runtime. Shipping an "AI assistant" would have
-  required a paid API key the project does not have, and a feature that stops working when a free
-  quota runs out is worse than no feature. The intelligence in this build is in the data model and
-  the transactional guarantees, not in a chat box.
+- **No language model is used at runtime, and the product does not claim one.** There is an **event
+  assistant** in the bottom-right corner that answers questions about event dates, fees, deadlines,
+  seats remaining, team sizes, prizes and how registration works — but it is a *deterministic
+  lookup*, not a chatbot. It classifies a question against a fixed set of intents, resolves any
+  event named in it, and answers from live database rows. The panel header says
+  "Reads the live event data · not a language model" so nobody is misled.
+- This was a deliberate trade. Wiring up an LLM would have needed a paid API key the project does
+  not have, and a feature that dies when a free quota runs out is worse than no feature. The
+  trade-off is honest: the assistant cannot hold a conversation, but it never invents an event that
+  does not exist, never quotes a stale price, and never goes down.
 
 ## 10. Screenshots
 

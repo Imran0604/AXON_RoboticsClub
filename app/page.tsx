@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { HeroSearch } from "@/components/HeroSearch";
 import { Particles } from "@/components/Particles";
+import { Orbitals } from "@/components/Orbitals";
 import { Typewriter } from "@/components/Typewriter";
 import { FestCardTile } from "@/components/FestCard";
 import { EventCardTile } from "@/components/EventCard";
@@ -38,6 +39,8 @@ export default async function HomePage() {
         />
 
         <div className="relative z-10 mx-auto w-full max-w-[84rem] px-5 pb-16 pt-16 sm:pb-20 sm:pt-24">
+          <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12">
+            <div className="min-w-0">
           {/* A true fact about right now, not a slogan. */}
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             <span
@@ -73,16 +76,16 @@ export default async function HomePage() {
             Headaches.
           </h1>
 
-          <div className="rise mt-7 max-w-2xl" style={{ animationDelay: "60ms" }}>
+          <div className="rise mt-6 max-w-xl" style={{ animationDelay: "60ms" }}>
             <Typewriter
               lead="One platform that handles"
               phrases={[
-                "every fest and every event in it.",
-                "registration forms you build yourself.",
+                "every fest and the events inside it.",
+                "forms the organisers build themselves.",
                 "capacity limits that actually hold.",
                 "waitlists that promote automatically.",
                 "QR tickets and check-in at the door.",
-                "payments recorded on the registration.",
+                "payments on the registration record.",
               ]}
             />
           </div>
@@ -101,6 +104,17 @@ export default async function HomePage() {
             <Link href="/fests" className="btn btn-ghost btn-lg">
               Browse all fests
             </Link>
+          </div>
+
+            </div>
+
+            {/* Orbital system — the club mark made kinetic: a signal node at
+                the centre with packets travelling fixed paths outward. Desktop
+                only; on a phone the background field already carries the
+                motion and this would be a lot of pixels for little gain. */}
+            <div className="relative hidden lg:block" aria-hidden="true">
+              <Orbitals className="h-[clamp(22rem,30vw,31rem)] w-full" />
+            </div>
           </div>
 
           {/* Figures as a thin instrument rail rather than boxed tiles. */}

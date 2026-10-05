@@ -67,6 +67,9 @@ locks the event row, so two people racing for the last seat cannot both win it.
   same transaction — a freed seat and an un-promoted queue can never coexist.
 - **Confirmation + QR ticket.** A unique code like `AXN-K4D-9PQ` and a QR pass encoding the check-in
   URL, so scanning it from any camera app lands an organiser on the verification screen.
+- **Payment details captured on the registration itself** for paid events — method, transaction
+  reference, paying number and referral code — so there is no second form and no spreadsheet to
+  reconcile against the registration list.
 - **My registrations**, grouped into upcoming, attended and cancelled, with ticket re-download and
   cancellation behind a deliberate confirmation step.
 
@@ -247,8 +250,13 @@ Stated plainly rather than hidden.
 - **No transactional email.** Confirmations and waitlist promotions are shown in the app but not
   emailed. Adding it would have meant another third-party account; the ticket page and My
   registrations carry the same information.
-- **No payment capture.** Event fees are recorded and totalled, but nothing is charged. Integrating
-  a gateway was out of scope.
+- **Payment is recorded, not charged.** Paid events collect the payment method (bKash, Nagad,
+  Rocket, bank transfer, card or cash on arrival), a transaction reference and the paying number,
+  and organisers see all of it in the participants table and the CSV export. But no gateway is
+  integrated, so nothing is actually debited and nothing is automatically verified — an organiser
+  still confirms each reference against their own statement. Doing it this way keeps payment on the
+  registration record instead of in a separate spreadsheet, which is the part that actually causes
+  reconciliation pain.
 - **No certificate generation** for attendees.
 - **No real-time updates.** Seat counts are correct on every page load, but an open page does not
   live-update when someone else registers. Capacity is still enforced correctly at submission.

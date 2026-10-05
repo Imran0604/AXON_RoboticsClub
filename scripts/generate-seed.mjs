@@ -392,6 +392,42 @@ const EXTRA = {
   ],
 };
 
+// Paid events additionally collect payment details. These used to be gathered
+// on a separate Google Form, which is exactly the split this platform exists to
+// remove — an organiser should not have to reconcile a spreadsheet against a
+// registration list to find out who has actually paid.
+const PAYMENT = [
+  {
+    label: "Payment method",
+    key: "payment_method",
+    type: "radio",
+    required: true,
+    options: ["bKash", "Nagad", "Rocket", "Bank transfer", "Card", "Cash on arrival"],
+  },
+  {
+    label: "Transaction ID or reference",
+    key: "payment_reference",
+    type: "text",
+    required: true,
+    placeholder: "The reference from your payment confirmation",
+    help_text: "Leave as 'CASH' if you selected cash on arrival.",
+  },
+  {
+    label: "Paying from (mobile number or account)",
+    key: "payment_from",
+    type: "phone",
+    required: false,
+    placeholder: "The number the payment was sent from",
+  },
+  {
+    label: "Club or campus ambassador reference",
+    key: "club_ref",
+    type: "text",
+    required: false,
+    placeholder: "If someone referred you, their name or code",
+  },
+];
+
 const TEAM_WORDS_A = ["Circuit", "Servo", "Torque", "Vector", "Delta", "Nimbus", "Quantum", "Iron", "Volt", "Axis", "Helix", "Photon", "Kinetic", "Binary", "Cobalt"];
 const TEAM_WORDS_B = ["Breakers", "Sentinels", "Dynamics", "Collective", "Syndicate", "Pioneers", "Mavericks", "Works", "Labs", "Squad", "Union", "Crew"];
 
@@ -494,7 +530,11 @@ out.push(
 let ffn = 0;
 const ffRows = [];
 for (const e of events) {
-  const fields = [...COMMON, ...(EXTRA[e.category] ?? [])];
+  const fields = [
+    ...COMMON,
+    ...(EXTRA[e.category] ?? []),
+    ...(e.fee > 0 ? PAYMENT : []),
+  ];
   fields.forEach((f, i) => {
     ffn++;
     ffRows.push(
@@ -533,6 +573,16 @@ const YEARS = COMMON[2].options;
 
 function answersFor(e, user) {
   const a = { full_name: user.name, institution: user.inst, year: pick(YEARS) };
+  if (e.fee > 0) {
+    const method = pick(["bKash", "Nagad", "Rocket", "Bank transfer", "Card", "Cash on arrival"]);
+    a.payment_method = method;
+    a.payment_reference =
+      method === "Cash on arrival"
+        ? "CASH"
+        : `${method.slice(0, 3).toUpperCase()}${int(100000000, 999999999)}`;
+    a.payment_from = method === "Cash on arrival" ? "" : `+88017${int(10000000, 99999999)}`;
+    a.club_ref = rnd() > 0.7 ? `CA-${int(100, 999)}` : "";
+  }
   for (const f of EXTRA[e.category] ?? []) {
     if (f.type === "select" || f.type === "radio") a[f.key] = pick(f.options);
     else if (f.type === "number") a[f.key] = String(int(0, 4));

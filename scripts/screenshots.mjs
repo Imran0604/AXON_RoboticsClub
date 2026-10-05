@@ -47,8 +47,8 @@ function findChrome() {
   throw new Error("No Chrome found. Set CHROME_PATH to your browser executable.");
 }
 
-const DESKTOP = { width: 1440, height: 900, deviceScaleFactor: 2 };
-const MOBILE = { width: 390, height: 844, deviceScaleFactor: 3, isMobile: true, hasTouch: true };
+const DESKTOP = { width: 1440, height: 900, deviceScaleFactor: 1.5 };
+const MOBILE = { width: 390, height: 844, deviceScaleFactor: 2, isMobile: true, hasTouch: true };
 
 /** Routes to capture: [file number, name, path, viewport, options] */
 const SHOTS = [
@@ -98,7 +98,10 @@ const host = new URL(BASE).hostname;
 console.log(`capturing ${SHOTS.length} screenshots from ${BASE}\n`);
 
 for (const [n, name, path, viewport, opt] of SHOTS) {
-  const page = await browser.newPage();
+  // A fresh incognito context per shot: cookies set for the admin captures
+  // would otherwise persist into the signed-out ones.
+  const context = await browser.createBrowserContext();
+  const page = await context.newPage();
   await page.setViewport(viewport);
 
   if (opt.as) {
@@ -136,6 +139,7 @@ for (const [n, name, path, viewport, opt] of SHOTS) {
     if (!target) {
       console.log(`  ${n} ${name.padEnd(20)} SKIPPED (no link found)`);
       await page.close();
+      await context.close();
       continue;
     }
   }
@@ -161,6 +165,13 @@ for (const [n, name, path, viewport, opt] of SHOTS) {
       f?.requestSubmit();
     });
     await sleep(2200);
+    // The thread auto-scrolls to the newest message; nudge back up so the
+    // question and the written answer are both in frame.
+    await page.evaluate(() => {
+      const panel = document.querySelector('[role="dialog"] .overflow-y-auto');
+      if (panel) panel.scrollTop = 0;
+    });
+    await sleep(400);
   }
 
   const file = join(OUT, `${n}-${name}.png`);
@@ -168,6 +179,7 @@ for (const [n, name, path, viewport, opt] of SHOTS) {
   const kb = (await import("node:fs")).statSync(file).size / 1024;
   console.log(`  ${n} ${name.padEnd(20)} ${viewport.width}x${viewport.height}  ${kb.toFixed(0)} KB`);
   await page.close();
+  await context.close();
 }
 
 await browser.close();

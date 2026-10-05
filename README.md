@@ -241,22 +241,58 @@ Disclosed in full, as the rules require.
 
 ## 10. Screenshots
 
-Screenshots live in `docs/screenshots/`. Capture these twelve to cover every scored area:
+Captured from the live deployment with `node scripts/screenshots.mjs <url>`, which drives a real
+Chrome via `puppeteer-core` and mints a session cookie for the signed-in views. Re-runnable, so
+these never drift from what is actually deployed.
 
-| # | View | Route |
+### Home
+
+![Home](docs/screenshots/01-home.png)
+
+The hero carries a live status line, a typed subheading, a working event search, and an ambient
+particle field with an orbital system — all drawn on canvas, with no hero image to download.
+
+### Browsing and registering
+
+| Fest directory | Event directory, filtered |
+|---|---|
+| ![Fest directory](docs/screenshots/02-fests.png) | ![Filtered events](docs/screenshots/03-events-filtered.png) |
+| Grouped into happening now / upcoming / past, computed from dates. | Category + fee filters combined, with the state held in the URL. |
+
+| Event detail | Registration form |
+|---|---|
+| ![Event detail](docs/screenshots/04-event-detail.png) | ![Registration](docs/screenshots/05-register.png) |
+| Live capacity meter, deadline countdown, rules, and the questions the form will ask. | Rendered from organiser-defined fields, including payment details on paid events. |
+
+| QR ticket | Event assistant |
+|---|---|
+| ![Ticket](docs/screenshots/06-ticket.png) | ![Assistant](docs/screenshots/11-assistant.png) |
+| Unique code and a scannable pass encoding the check-in URL. | Answers from live data. Labelled in the UI as not being a language model. |
+
+### Organiser tooling
+
+| Mission Control | Participants |
+|---|---|
+| ![Dashboard](docs/screenshots/07-admin-dashboard.png) | ![Participants](docs/screenshots/08-admin-participants.png) |
+| KPI tiles, a 30-day time series, status breakdown and an attention list. | 470 registrations, searchable and filterable, with bulk status actions. |
+
+| Registration form builder | Check-in scanner |
+|---|---|
+| ![Form builder](docs/screenshots/09-form-builder.png) | ![Scanner](docs/screenshots/10-scanner.png) |
+| Nine field types, required flags, option lists, reorderable. | Camera scanning with manual code entry as a fallback that always works. |
+
+### Responsive and theming
+
+| Mobile — events | Mobile — admin | Light theme |
 |---|---|---|
-| 01 | Home | `/` |
-| 02 | Fest directory, grouped by status | `/fests` |
-| 03 | Event directory with filters applied | `/events?category=Hardware&fee=free` |
-| 04 | Event detail with capacity and countdown | `/events/line-follower-championship` |
-| 05 | Registration form (organiser-defined fields) | `/events/robosoccer-5v5/register` |
-| 06 | QR ticket | `/tickets/<code>` |
-| 07 | Mission Control dashboard | `/admin` |
-| 08 | Participants table with a filter | `/admin/registrations?status=waitlisted` |
-| 09 | Registration form builder | `/admin/events/<id>` |
-| 10 | Check-in scanner | `/admin/scan` |
-| 11 | Mobile layout (375px wide) | `/events` and `/admin/registrations` |
-| 12 | Light theme | any route, theme toggle switched to light |
+| ![Mobile events](docs/screenshots/13-mobile-events.png) | ![Mobile admin](docs/screenshots/14-mobile-admin.png) | ![Light theme](docs/screenshots/15-light-theme.png) |
+| 390px wide. | The participants table becomes cards under 768px. | Dark is the default; light is an opt-in on the toggle. |
+
+### Reviewer guide
+
+![Reviewer guide](docs/screenshots/12-reviewer-guide.png)
+
+Every capability linked to the page that demonstrates it, with one-click sign-in for all three roles.
 
 ## 11. Known limitations
 

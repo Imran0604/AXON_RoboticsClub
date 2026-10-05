@@ -510,6 +510,20 @@ insert into event_form_fields (id, event_id, label, field_key, type, placeholder
 out.push(ffRows.join(",\n") + ";\n");
 
 // --- registrations ---
+// The demo participant account must already hold a spread of registrations,
+// otherwise a judge signing in as "student@axon.club" sees an empty page and
+// cannot evaluate the view/manage requirement at all. Each entry pins one
+// status so every state is reachable from that one account.
+const DEMO_USER = uid(3);
+const DEMO_PLAN = {
+  1: "waitlisted",   // full event -> shows queue position
+  3: "confirmed",
+  5: "confirmed",
+  7: "pending",      // awaiting organiser review
+  9: "confirmed",    // upcoming fest, team entry
+  15: "checked_in",  // past event -> attendance history
+};
+
 let rn = 0;
 const regRows = [];
 const auditRows = [];
@@ -539,6 +553,35 @@ for (const e of events) {
   let seated = 0;
   let waitlisted = 0;
   let attempts = 0;
+
+  // Place the demo participant before anyone else so their seat is reserved
+  // inside this event's capacity rather than overflowing it.
+  const demoStatus = DEMO_PLAN[e.n];
+  if (demoStatus) {
+    const demoUser = users.find((u) => u.id === DEMO_USER);
+    usedPairs.add(`${e.n}:${DEMO_USER}`);
+    rn++;
+    if (demoStatus === "waitlisted") waitlisted++;
+    else seated++;
+
+    const teamed = e.team[1] > 1;
+    {
+      const members = teamed
+        ? [{ name: "Rafiul Karim", institution: "Notre Dame College, Dhaka" }]
+        : [];
+      regRows.push(
+        `(${q(rid(rn))}, ${q(eid(e.n))}, ${q(DEMO_USER)}, ${q(demoStatus)}, ${q(
+          `AXN-${String(e.n).padStart(2, "0")}-${String(rn).padStart(4, "0")}`
+        )}, ${q(teamed ? "Axon Cadets" : null)}, ${j(members)}, ${j(answersFor(e, demoUser))}, ${
+          demoStatus === "waitlisted" ? 1 : "NULL"
+        }, ${
+          demoStatus === "checked_in"
+            ? q(new Date(new Date(e.starts_at).getTime() + 12 * 60000).toISOString())
+            : "NULL"
+        }, ${q(new Date(new Date(e.deadline).getTime() - 9 * 86400000).toISOString())})`
+      );
+    }
+  }
   while ((seated < target || waitlisted < e.wait) && attempts < pool.length * 3) {
     attempts++;
     const u = pick(pool);

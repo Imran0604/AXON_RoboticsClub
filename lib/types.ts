@@ -86,10 +86,15 @@ export interface FormField {
   position: number;
 }
 
-export interface TeamMember {
+/**
+ * Declared as a type alias rather than an interface on purpose: TypeScript
+ * grants implicit index signatures to type aliases but not to interfaces, and
+ * without one this cannot be passed to postgres.js's json() helper.
+ */
+export type TeamMember = {
   name: string;
   institution?: string;
-}
+};
 
 export interface Registration {
   id: string;

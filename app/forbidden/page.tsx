@@ -36,7 +36,7 @@ export default async function ForbiddenPage() {
 
         <div
           className="rounded-sm border px-3.5 py-3 text-[0.8125rem] leading-relaxed"
-          style={{ background: "var(--brass-soft)", borderColor: "var(--brass)" }}
+          style={{ background: "var(--accent-soft)", borderColor: "var(--accent)" }}
         >
           <strong className="font-semibold text-ink">Evaluating the project?</strong> Use the
           one-click <em>Enter as Organizer</em> or <em>Enter as Admin</em> button on the sign-in page

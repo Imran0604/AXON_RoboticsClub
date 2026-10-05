@@ -37,9 +37,9 @@ export function DemoLogins() {
     <div className="card overflow-hidden">
       <div
         className="flex items-center gap-2 border-b border-line px-4 py-3"
-        style={{ background: "var(--brass-soft)" }}
+        style={{ background: "var(--accent-soft)" }}
       >
-        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="var(--brass)" strokeWidth="1.6" aria-hidden="true">
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="var(--accent)" strokeWidth="1.6" aria-hidden="true">
           <path d="M8 1.5l2 4.4 4.5.5-3.4 3 1 4.6L8 11.7 3.9 14l1-4.6-3.4-3 4.5-.5L8 1.5Z" strokeLinejoin="round" />
         </svg>
         <div>

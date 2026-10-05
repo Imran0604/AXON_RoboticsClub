@@ -27,9 +27,9 @@ export function AdminNav() {
               aria-current={active ? "page" : undefined}
               className="whitespace-nowrap rounded-sm px-3 py-2 text-[0.8125rem] font-semibold transition-colors"
               style={{
-                background: active ? "var(--navy)" : "var(--surface)",
-                color: active ? "var(--on-navy)" : "var(--ink-2)",
-                border: `1px solid ${active ? "var(--navy)" : "var(--line)"}`,
+                background: active ? "var(--brand)" : "var(--surface)",
+                color: active ? "var(--on-brand)" : "var(--ink-2)",
+                border: `1px solid ${active ? "var(--brand)" : "var(--line)"}`,
               }}
             >
               {t.label}

@@ -42,27 +42,25 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#eff1f3" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a1016" },
-  ],
+  themeColor: "#0d0b0a",
 };
 
 /**
- * Applies the stored theme before first paint. Without this the page renders
- * in the system theme and then snaps to the chosen one, which is a visible
- * flash on every navigation.
+ * Dark is the default, so this script only has to stamp the root when the
+ * visitor has explicitly chosen light. It must run before first paint —
+ * otherwise a light-mode visitor sees a dark flash on every navigation.
  */
 const NO_FLASH = `
 try {
-  var m = localStorage.getItem('axon-theme');
-  if (m === 'light' || m === 'dark') document.documentElement.setAttribute('data-theme', m);
+  if (localStorage.getItem('axon-theme') === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
 } catch (e) {}
 `;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${archivo.variable} ${plexMono.variable} h-full antialiased`}>
+    <html lang="en" data-color-scheme="dark" className={`${archivo.variable} ${plexMono.variable} h-full antialiased`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: NO_FLASH }} />
       </head>

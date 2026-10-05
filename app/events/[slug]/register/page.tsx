@@ -78,11 +78,11 @@ export default async function RegisterPage({ params }: PageProps<"/events/[slug]
   return (
     <div className="mx-auto w-full max-w-[64rem] px-5 py-10">
       <nav className="mono flex flex-wrap items-center gap-1.5 text-[0.6875rem] text-ink-3" aria-label="Breadcrumb">
-        <Link href={`/fests/${event.fest_slug}`} className="hover:text-brass">
+        <Link href={`/fests/${event.fest_slug}`} className="hover:text-accent">
           {event.fest_name}
         </Link>
         <span aria-hidden="true">/</span>
-        <Link href={`/events/${event.slug}`} className="hover:text-brass">
+        <Link href={`/events/${event.slug}`} className="hover:text-accent">
           {event.title}
         </Link>
         <span aria-hidden="true">/</span>
@@ -154,7 +154,7 @@ export default async function RegisterPage({ params }: PageProps<"/events/[slug]
             </dl>
             <Link
               href={`/events/${event.slug}`}
-              className="mono mt-3 inline-block text-[0.6875rem] font-semibold text-navy hover:text-brass"
+              className="mono mt-3 inline-block text-[0.6875rem] font-semibold text-brand hover:text-accent"
             >
               ← Back to full details
             </Link>

@@ -36,7 +36,7 @@ export function Countdown({ deadline, fallback }: { deadline: string; fallback: 
   }, [deadline]);
 
   return (
-    <span className="mono nums text-[0.8125rem] font-semibold" style={{ color: "var(--brass)" }}>
+    <span className="mono nums text-[0.8125rem] font-semibold" style={{ color: "var(--accent)" }}>
       {label}
     </span>
   );

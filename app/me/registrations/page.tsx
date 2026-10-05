@@ -126,13 +126,13 @@ function Group({
                 </div>
 
                 <h3 className="mt-2 text-[1rem] font-bold leading-snug">
-                  <Link href={`/events/${r.event_slug}`} className="hover:text-navy">
+                  <Link href={`/events/${r.event_slug}`} className="hover:text-brand">
                     {r.event_title}
                   </Link>
                 </h3>
 
                 <p className="mt-0.5 text-[0.8125rem] text-ink-2">
-                  <Link href={`/fests/${r.fest_slug}`} className="hover:text-brass">
+                  <Link href={`/fests/${r.fest_slug}`} className="hover:text-accent">
                     {r.fest_name}
                   </Link>
                   {" · "}

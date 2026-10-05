@@ -153,7 +153,7 @@ export default async function TicketPage({ params, searchParams }: PageProps<"/t
             )}
 
             {reg.checked_in_at && (
-              <p className="mono text-[0.75rem]" style={{ color: "var(--brass)" }}>
+              <p className="mono text-[0.75rem]" style={{ color: "var(--accent)" }}>
                 Checked in at {fmtDateTime(reg.checked_in_at)}
               </p>
             )}

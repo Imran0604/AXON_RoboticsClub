@@ -20,17 +20,17 @@ export function Empty({
     <div className="card flex flex-col items-center gap-3 px-6 py-14 text-center">
       <svg viewBox="0 0 120 100" width="104" height="86" aria-hidden="true">
         {/* A small robot sitting beside an empty crate. */}
-        <rect x="14" y="54" width="36" height="28" rx="2" fill="none" stroke="var(--navy)" strokeWidth="2.2" opacity="0.5" />
-        <path d="M14 61h36" stroke="var(--navy)" strokeWidth="2.2" opacity="0.5" />
-        <path d="M18 54l6-8h22l6 8" fill="none" stroke="var(--navy)" strokeWidth="2.2" strokeLinejoin="round" opacity="0.35" />
-        <rect x="64" y="44" width="38" height="30" rx="5" fill="none" stroke="var(--navy)" strokeWidth="2.4" />
-        <circle cx="75" cy="57" r="3.4" fill="var(--navy)" />
-        <circle cx="91" cy="57" r="3.4" fill="var(--navy)" />
-        <path d="M76 66q7 4 14 0" fill="none" stroke="var(--navy)" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
-        <path d="M83 44v-8" stroke="var(--navy)" strokeWidth="2.2" strokeLinecap="round" />
-        <circle cx="83" cy="33" r="3.6" fill="var(--brass)" />
-        <path d="M64 58h-7M102 58h7" stroke="var(--navy)" strokeWidth="2.2" strokeLinecap="round" opacity="0.5" />
-        <path d="M70 74v6M96 74v6" stroke="var(--navy)" strokeWidth="2.2" strokeLinecap="round" opacity="0.5" />
+        <rect x="14" y="54" width="36" height="28" rx="2" fill="none" stroke="var(--brand)" strokeWidth="2.2" opacity="0.5" />
+        <path d="M14 61h36" stroke="var(--brand)" strokeWidth="2.2" opacity="0.5" />
+        <path d="M18 54l6-8h22l6 8" fill="none" stroke="var(--brand)" strokeWidth="2.2" strokeLinejoin="round" opacity="0.35" />
+        <rect x="64" y="44" width="38" height="30" rx="5" fill="none" stroke="var(--brand)" strokeWidth="2.4" />
+        <circle cx="75" cy="57" r="3.4" fill="var(--brand)" />
+        <circle cx="91" cy="57" r="3.4" fill="var(--brand)" />
+        <path d="M76 66q7 4 14 0" fill="none" stroke="var(--brand)" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+        <path d="M83 44v-8" stroke="var(--brand)" strokeWidth="2.2" strokeLinecap="round" />
+        <circle cx="83" cy="33" r="3.6" fill="var(--accent)" />
+        <path d="M64 58h-7M102 58h7" stroke="var(--brand)" strokeWidth="2.2" strokeLinecap="round" opacity="0.5" />
+        <path d="M70 74v6M96 74v6" stroke="var(--brand)" strokeWidth="2.2" strokeLinecap="round" opacity="0.5" />
       </svg>
       <h3 className="text-[1.0625rem] font-bold">{title}</h3>
       <p className="max-w-sm text-[0.875rem] leading-relaxed text-ink-2">{body}</p>

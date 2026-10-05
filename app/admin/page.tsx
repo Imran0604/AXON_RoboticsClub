@@ -53,7 +53,7 @@ export default async function AdminDashboard() {
             tone={stats.pending > 0 ? "warn" : "default"}
           />
           <StatTile label="Waitlisted" value={stats.waitlisted} sub="Queued for a place" />
-          <StatTile label="Checked in" value={stats.checked_in} sub="Scanned at a venue" tone="brass" />
+          <StatTile label="Checked in" value={stats.checked_in} sub="Scanned at a venue" tone="accent" />
           <StatTile label="Fees collected" value={fmtFee(stats.revenue_bdt)} sub="Confirmed + checked in" />
         </div>
       </section>
@@ -83,7 +83,7 @@ export default async function AdminDashboard() {
               <StatusStrip
                 segments={[
                   { label: "Confirmed", value: stats.confirmed, color: "var(--ok)" },
-                  { label: "Checked in", value: stats.checked_in, color: "var(--brass)" },
+                  { label: "Checked in", value: stats.checked_in, color: "var(--accent)" },
                   { label: "Pending", value: stats.pending, color: "var(--warn)" },
                   { label: "Waitlisted", value: stats.waitlisted, color: "var(--info)" },
                   { label: "Cancelled", value: stats.cancelled, color: "var(--ink-3)" },
@@ -133,7 +133,7 @@ export default async function AdminDashboard() {
           </div>
           <Link
             href="/admin/analytics"
-            className="mono mt-4 inline-block text-[0.6875rem] font-semibold text-navy hover:text-brass"
+            className="mono mt-4 inline-block text-[0.6875rem] font-semibold text-brand hover:text-accent"
           >
             All {fill.length} events by fill rate →
           </Link>
@@ -176,7 +176,7 @@ export default async function AdminDashboard() {
                     <span className="block text-[0.6875rem] text-ink-3">{r.participant_institution}</span>
                   </td>
                   <td>
-                    <Link href={`/events/${r.event_slug}`} className="hover:text-navy">
+                    <Link href={`/events/${r.event_slug}`} className="hover:text-brand">
                       {r.event_title}
                     </Link>
                   </td>

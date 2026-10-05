@@ -70,14 +70,14 @@ export default async function AdminEventsPage() {
                                 {e.status}
                               </span>
                               {gate.open ? (
-                                <span className="badge badge-navy">Open</span>
+                                <span className="badge badge-brand">Open</span>
                               ) : (
                                 <span className="badge badge-neutral">{GATE_MESSAGE[gate.reason]}</span>
                               )}
                             </div>
 
                             <h4 className="mt-1.5 text-[0.9375rem] font-bold leading-snug">
-                              <Link href={`/admin/events/${e.id}`} className="hover:text-navy">
+                              <Link href={`/admin/events/${e.id}`} className="hover:text-brand">
                                 {e.title}
                               </Link>
                             </h4>

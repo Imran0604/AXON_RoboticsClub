@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Logo } from "@/components/Logo";
+import { HeroSearch } from "@/components/HeroSearch";
 import { FestCardTile } from "@/components/FestCard";
 import { EventCardTile } from "@/components/EventCard";
 import { getDashboardStats, getFests, searchEvents } from "@/lib/queries";
@@ -21,47 +21,88 @@ export default async function HomePage() {
   return (
     <>
       {/* ---------------------------------------------------------------- Hero */}
-      <section className="relative overflow-hidden border-b border-line bg-surface grid-texture grid-fade">
-        <div className="relative mx-auto w-full max-w-[84rem] px-5 py-16 sm:py-20">
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-2.5">
-              <Logo size={34} />
-              <p className="eyebrow">AXON Robotics Club · Est. 2025</p>
-            </div>
-
-            <h1 className="rise mt-6 text-[2.25rem] font-extrabold leading-[1.08] sm:text-[3.25rem]">
-              Club operations without
-              <br />
-              <span className="text-brass">the Google Form.</span>
-            </h1>
-
-            <p className="rise mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-ink-2" style={{ animationDelay: "60ms" }}>
-              Browse every festival the club runs, explore the events inside each one, and register
-              in a form the organisers built themselves — with real capacity limits, real deadlines,
-              and a ticket at the end of it.
-            </p>
-
-            <div className="rise mt-7 flex flex-wrap gap-2.5" style={{ animationDelay: "120ms" }}>
-              <Link href="/fests" className="btn btn-primary btn-lg">
-                Browse fests
-              </Link>
-              <Link href="/events?open=1" className="btn btn-ghost btn-lg">
-                {stats.total_events} events open
-              </Link>
-            </div>
+      <section className="relative overflow-hidden border-b border-line grid-texture glow">
+        <div className="relative z-10 mx-auto w-full max-w-[84rem] px-5 pb-14 pt-16 sm:pb-16 sm:pt-24">
+          {/* Live status line — the first thing on the page is a true fact
+              about right now, not a slogan. */}
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span className="flex items-center gap-2 rounded-full border px-2.5 py-1" style={{ borderColor: "var(--line-2)" }}>
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full rounded-full opacity-60" style={{ background: "var(--ok)" }} />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ background: "var(--ok)" }} />
+              </span>
+              <span className="mono text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-ink-2">
+                {live.length > 0 ? `${live[0].name} is running now` : `${upcoming.length} fests announced`}
+              </span>
+            </span>
+            <span className="eyebrow">AXON Robotics Club · Est. 2025</span>
           </div>
 
-          {/* Operational figures, pulled live rather than written into the page. */}
-          <dl className="rise mt-14 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4" style={{ animationDelay: "180ms" }}>
+          {/* Thesis. The brief's own complaint, answered in the headline. */}
+          <h1 className="rise mt-7 max-w-[20ch] text-[2.5rem] font-extrabold leading-[0.98] tracking-[-0.035em] sm:text-[4rem] lg:text-[4.75rem]">
+            Club operations
+            <br />
+            without the{" "}
+            <span className="relative whitespace-nowrap" style={{ color: "var(--brand)" }}>
+              Google Form
+              <svg
+                className="absolute -bottom-1 left-0 w-full"
+                height="7"
+                viewBox="0 0 300 7"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path d="M1 5.5 Q 150 1 299 5" fill="none" stroke="var(--brand)" strokeWidth="2.5" strokeLinecap="round" opacity="0.5" />
+              </svg>
+            </span>
+            .
+          </h1>
+
+          <p
+            className="rise mt-7 max-w-xl text-[1.0625rem] leading-relaxed text-ink-2"
+            style={{ animationDelay: "60ms" }}
+          >
+            Browse every festival the club runs, explore the events inside each one, and register in
+            a form the organisers built themselves — with real capacity limits, real deadlines, and
+            a scannable ticket at the end of it.
+          </p>
+
+          <div className="rise mt-8" style={{ animationDelay: "120ms" }}>
+            <HeroSearch
+              eventCount={stats.total_events}
+              suggestions={["drone", "workshop", "free", "hardware"]}
+            />
+          </div>
+
+          <div className="rise mt-8 flex flex-wrap gap-2.5" style={{ animationDelay: "160ms" }}>
+            <Link href="/events?open=1" className="btn btn-primary btn-lg">
+              {openEvents.length} events open now
+            </Link>
+            <Link href="/fests" className="btn btn-ghost btn-lg">
+              Browse all fests
+            </Link>
+          </div>
+
+          {/* Figures as a thin mono rail rather than boxed tiles — denser, and
+              it reads as instrumentation rather than marketing. */}
+          <dl
+            className="rise mt-14 flex flex-wrap gap-y-5 border-t pt-6"
+            style={{ borderColor: "var(--line)", animationDelay: "200ms" }}
+          >
             {[
               { k: "Festivals", v: stats.total_fests },
               { k: "Events", v: stats.total_events },
               { k: "Registrations", v: stats.total_registrations },
               { k: "Participants", v: stats.total_participants },
-            ].map((s) => (
-              <div key={s.k} className="flex flex-col border-l-2 pl-3" style={{ borderColor: "var(--brass)" }}>
-                <dd className="mono nums text-[1.75rem] font-semibold leading-none text-ink">{s.v}</dd>
-                <dt className="eyebrow mt-1.5">{s.k}</dt>
+              { k: "Checked in", v: stats.checked_in },
+            ].map((s, i) => (
+              <div
+                key={s.k}
+                className="flex min-w-[7.5rem] flex-col gap-1 px-5 first:pl-0"
+                style={{ borderLeft: i === 0 ? "none" : "1px solid var(--line)" }}
+              >
+                <dt className="eyebrow">{s.k}</dt>
+                <dd className="mono nums text-[1.5rem] font-semibold leading-none text-ink">{s.v}</dd>
               </div>
             ))}
           </dl>
@@ -69,10 +110,10 @@ export default async function HomePage() {
       </section>
 
       {/* ------------------------------------------------------- Judge banner */}
-      <aside className="border-b border-line" style={{ background: "var(--brass-soft)" }}>
+      <aside className="border-b border-line" style={{ background: "var(--accent-soft)" }}>
         <div className="mx-auto flex w-full max-w-[84rem] flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-start gap-3">
-            <svg viewBox="0 0 16 16" width="17" height="17" fill="none" stroke="var(--brass)" strokeWidth="1.6" className="mt-0.5 shrink-0">
+            <svg viewBox="0 0 16 16" width="17" height="17" fill="none" stroke="var(--accent)" strokeWidth="1.6" className="mt-0.5 shrink-0">
               <path d="M8 1.5l2 4.4 4.5.5-3.4 3 1 4.6L8 11.7 3.9 14l1-4.6-3.4-3 4.5-.5L8 1.5Z" strokeLinejoin="round" />
             </svg>
             <div>
@@ -83,7 +124,7 @@ export default async function HomePage() {
               </p>
             </div>
           </div>
-          <Link href="/judge" className="btn btn-brass btn-sm shrink-0 self-start sm:self-auto">
+          <Link href="/judge" className="btn btn-accent btn-sm shrink-0 self-start sm:self-auto">
             Open judge guide
           </Link>
         </div>
@@ -98,7 +139,7 @@ export default async function HomePage() {
               {live.length > 0 ? "Happening now and coming up" : "Upcoming festivals"}
             </h2>
           </div>
-          <Link href="/fests" className="mono shrink-0 text-[0.75rem] font-semibold text-navy hover:text-brass">
+          <Link href="/fests" className="mono shrink-0 text-[0.75rem] font-semibold text-brand hover:text-accent">
             All {fests.length} fests →
           </Link>
         </div>
@@ -119,7 +160,7 @@ export default async function HomePage() {
                 <p className="eyebrow">Open for registration</p>
                 <h2 className="mt-1.5 text-[1.625rem] font-extrabold">Register before these close</h2>
               </div>
-              <Link href="/events" className="mono shrink-0 text-[0.75rem] font-semibold text-navy hover:text-brass">
+              <Link href="/events" className="mono shrink-0 text-[0.75rem] font-semibold text-brand hover:text-accent">
                 Search all events →
               </Link>
             </div>
@@ -159,7 +200,7 @@ export default async function HomePage() {
               },
             ].map((s, i) => (
               <li key={s.t} className="flex flex-col gap-2">
-                <span className="mono text-[0.6875rem] font-semibold text-brass">
+                <span className="mono text-[0.6875rem] font-semibold text-accent">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="h-px w-full" style={{ background: "var(--line)" }} />

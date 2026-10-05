@@ -44,8 +44,8 @@ export function BulkToolbar({ formId }: { formId: string }) {
     <div
       className="flex flex-wrap items-center gap-2.5 rounded-sm border px-3 py-2.5"
       style={{
-        background: none ? "var(--surface-2)" : "var(--navy-soft)",
-        borderColor: none ? "var(--line)" : "var(--navy)",
+        background: none ? "var(--surface-2)" : "var(--brand-soft)",
+        borderColor: none ? "var(--line)" : "var(--brand)",
       }}
     >
       <label className="flex cursor-pointer items-center gap-2">

@@ -28,7 +28,7 @@ export function FestCardTile({ fest }: { fest: FestCardData }) {
         <div>
           <p className="mono text-[0.6875rem] text-ink-3">{fmtDateRange(fest.start_date, fest.end_date)}</p>
           <h3 className="mt-1 text-[1.0625rem] font-bold leading-snug">
-            <Link href={`/fests/${fest.slug}`} className="hover:text-navy">
+            <Link href={`/fests/${fest.slug}`} className="hover:text-brand">
               {fest.name}
             </Link>
           </h3>
@@ -55,7 +55,7 @@ export function FestCardTile({ fest }: { fest: FestCardData }) {
           </div>
           <Link
             href={`/fests/${fest.slug}`}
-            className="mono text-[0.6875rem] font-semibold text-navy group-hover:text-brass"
+            className="mono text-[0.6875rem] font-semibold text-brand group-hover:text-accent"
           >
             View events →
           </Link>

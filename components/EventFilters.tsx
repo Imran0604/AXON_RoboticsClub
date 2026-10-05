@@ -117,7 +117,7 @@ export function EventFilters({ categories, fests, resultCount }: FilterOptions &
           className="badge"
           style={
             !params.get("category")
-              ? { background: "var(--navy)", color: "var(--on-navy)", borderColor: "var(--navy)" }
+              ? { background: "var(--brand)", color: "var(--on-brand)", borderColor: "var(--brand)" }
               : { background: "var(--surface)", color: "var(--ink-2)", borderColor: "var(--line-2)" }
           }
         >
@@ -134,7 +134,7 @@ export function EventFilters({ categories, fests, resultCount }: FilterOptions &
               className="badge"
               style={
                 on
-                  ? { background: "var(--navy)", color: "var(--on-navy)", borderColor: "var(--navy)" }
+                  ? { background: "var(--brand)", color: "var(--on-brand)", borderColor: "var(--brand)" }
                   : { background: "var(--surface)", color: "var(--ink-2)", borderColor: "var(--line-2)" }
               }
             >
@@ -217,8 +217,8 @@ function Toggle({
               aria-pressed={on}
               className="rounded-[3px] px-2 py-1 text-[0.75rem] font-semibold transition-colors"
               style={{
-                background: on ? "var(--navy)" : "transparent",
-                color: on ? "var(--on-navy)" : "var(--ink-3)",
+                background: on ? "var(--brand)" : "transparent",
+                color: on ? "var(--on-brand)" : "var(--ink-3)",
               }}
             >
               {l}

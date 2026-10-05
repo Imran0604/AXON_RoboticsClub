@@ -65,11 +65,11 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
         />
         <div className="relative mx-auto w-full max-w-[84rem] px-5 py-11">
           <nav className="mono flex flex-wrap items-center gap-1.5 text-[0.6875rem] text-ink-3" aria-label="Breadcrumb">
-            <Link href="/fests" className="hover:text-brass">
+            <Link href="/fests" className="hover:text-accent">
               Fests
             </Link>
             <span aria-hidden="true">/</span>
-            <Link href={`/fests/${event.fest_slug}`} className="hover:text-brass">
+            <Link href={`/fests/${event.fest_slug}`} className="hover:text-accent">
               {event.fest_name}
             </Link>
             <span aria-hidden="true">/</span>
@@ -77,7 +77,7 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
           </nav>
 
           <div className="mt-4 flex flex-wrap items-center gap-2">
-            <span className="badge badge-navy">{event.category}</span>
+            <span className="badge badge-brand">{event.category}</span>
             <span className={`badge ${event.fee_bdt === 0 ? "badge-ok" : "badge-neutral"}`}>
               {fmtFee(event.fee_bdt)}
             </span>
@@ -156,7 +156,7 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
               <ul className="mt-3 flex flex-col gap-2">
                 {event.rules.split("\n").filter(Boolean).map((rule, i) => (
                   <li key={i} className="flex gap-2.5 text-[0.875rem] leading-relaxed text-ink-2">
-                    <span className="mono mt-0.5 shrink-0 text-[0.6875rem] text-brass">
+                    <span className="mono mt-0.5 shrink-0 text-[0.6875rem] text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span>{rule}</span>
@@ -203,7 +203,7 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
             {event.prize && (
               <div className="card p-4">
                 <h3 className="eyebrow">Prize</h3>
-                <p className="mt-2 text-[0.9375rem] font-semibold text-brass">{event.prize}</p>
+                <p className="mt-2 text-[0.9375rem] font-semibold text-accent">{event.prize}</p>
               </div>
             )}
           </section>
@@ -267,7 +267,7 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
                 <div className="flex flex-col gap-2.5 border-t border-line pt-3.5">
                   <Link
                     href={user ? `/events/${event.slug}/register` : `/login?next=/events/${event.slug}/register`}
-                    className={`btn w-full btn-lg ${canWaitlist ? "btn-brass" : "btn-primary"}`}
+                    className={`btn w-full btn-lg ${canWaitlist ? "btn-accent" : "btn-primary"}`}
                   >
                     {canWaitlist ? "Join the waitlist" : "Register for this event"}
                   </Link>
@@ -301,12 +301,12 @@ export default async function EventPage({ params }: PageProps<"/events/[slug]">)
 
           <div className="card mt-4 p-4">
             <h3 className="eyebrow">Part of</h3>
-            <Link href={`/fests/${event.fest_slug}`} className="mt-2 block text-[0.9375rem] font-bold hover:text-navy">
+            <Link href={`/fests/${event.fest_slug}`} className="mt-2 block text-[0.9375rem] font-bold hover:text-brand">
               {event.fest_name}
             </Link>
             <Link
               href={`/events?fest=${event.fest_slug}`}
-              className="mono mt-2 inline-block text-[0.6875rem] font-semibold text-navy hover:text-brass"
+              className="mono mt-2 inline-block text-[0.6875rem] font-semibold text-brand hover:text-accent"
             >
               Other events in this fest →
             </Link>

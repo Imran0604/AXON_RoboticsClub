@@ -19,7 +19,7 @@ export default async function AdminLayout({ children }: LayoutProps<"/admin">) {
             <h1 className="mt-1 text-[1.5rem] font-extrabold">AXON Robotics Club</h1>
           </div>
           <div className="flex items-center gap-2.5">
-            <span className="badge badge-brass">{staff.role}</span>
+            <span className="badge badge-accent">{staff.role}</span>
             <span className="hidden text-[0.8125rem] text-ink-2 sm:inline">{staff.name}</span>
             <Link href="/" className="btn btn-ghost btn-sm">
               View public site

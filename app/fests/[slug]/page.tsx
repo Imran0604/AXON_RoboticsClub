@@ -57,7 +57,7 @@ export default async function FestPage({ params }: PageProps<"/fests/[slug]">) {
         />
         <div className="relative mx-auto w-full max-w-[84rem] px-5 py-12">
           <nav className="mono flex items-center gap-1.5 text-[0.6875rem] text-ink-3" aria-label="Breadcrumb">
-            <Link href="/fests" className="hover:text-brass">
+            <Link href="/fests" className="hover:text-accent">
               Fests
             </Link>
             <span aria-hidden="true">/</span>
@@ -67,7 +67,7 @@ export default async function FestPage({ params }: PageProps<"/fests/[slug]">) {
           <div className="mt-4 flex flex-wrap items-center gap-2">
             <span className={`badge ${FEST_PHASE_TONE[phase]}`}>{FEST_PHASE_LABEL[phase]}</span>
             <span className="badge badge-neutral">{fmtDateRange(fest.start_date, fest.end_date)}</span>
-            {openCount > 0 && <span className="badge badge-brass">{openCount} open now</span>}
+            {openCount > 0 && <span className="badge badge-accent">{openCount} open now</span>}
           </div>
 
           <h1 className="mt-3.5 max-w-3xl text-[2rem] font-extrabold leading-tight sm:text-[2.625rem]">
@@ -110,7 +110,7 @@ export default async function FestPage({ params }: PageProps<"/fests/[slug]">) {
           </div>
           <Link
             href={`/events?fest=${fest.slug}`}
-            className="mono text-[0.75rem] font-semibold text-navy hover:text-brass"
+            className="mono text-[0.75rem] font-semibold text-brand hover:text-accent"
           >
             Search and filter these events →
           </Link>

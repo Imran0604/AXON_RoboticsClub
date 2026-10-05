@@ -154,7 +154,7 @@ export default async function AdminRegistrationsPage({
                         )}
                       </td>
                       <td className="min-w-[11rem]">
-                        <Link href={`/events/${r.event_slug}`} className="font-medium hover:text-navy">
+                        <Link href={`/events/${r.event_slug}`} className="font-medium hover:text-brand">
                           {r.event_title}
                         </Link>
                         <span className="block text-[0.6875rem] text-ink-3">{r.fest_name}</span>
@@ -170,7 +170,7 @@ export default async function AdminRegistrationsPage({
                         )}
                       </td>
                       <td className="mono text-[0.75rem] text-ink-2">
-                        <Link href={`/tickets/${r.ticket_code}`} className="hover:text-navy">
+                        <Link href={`/tickets/${r.ticket_code}`} className="hover:text-brand">
                           {r.ticket_code}
                         </Link>
                       </td>
@@ -202,11 +202,11 @@ export default async function AdminRegistrationsPage({
               <div className="flex flex-col gap-1.5">
                 {result.rows.map((r) => (
                   <details key={r.id} className="text-[0.8125rem]">
-                    <summary className="cursor-pointer py-1 font-medium hover:text-navy">
+                    <summary className="cursor-pointer py-1 font-medium hover:text-brand">
                       {r.participant_name}
                       <span className="mono ml-2 text-[0.6875rem] text-ink-3">{r.ticket_code}</span>
                     </summary>
-                    <dl className="mt-2 grid gap-x-6 gap-y-1.5 border-l-2 pl-3 sm:grid-cols-2" style={{ borderColor: "var(--brass)" }}>
+                    <dl className="mt-2 grid gap-x-6 gap-y-1.5 border-l-2 pl-3 sm:grid-cols-2" style={{ borderColor: "var(--accent)" }}>
                       {Object.entries(r.answers).length === 0 ? (
                         <p className="text-ink-3">No answers recorded.</p>
                       ) : (
@@ -260,7 +260,7 @@ export default async function AdminRegistrationsPage({
                     <p className="text-[0.75rem] text-ink-3">{r.participant_institution}</p>
 
                     <p className="mt-2 text-[0.8125rem]">
-                      <Link href={`/events/${r.event_slug}`} className="font-medium hover:text-navy">
+                      <Link href={`/events/${r.event_slug}`} className="font-medium hover:text-brand">
                         {r.event_title}
                       </Link>
                     </p>

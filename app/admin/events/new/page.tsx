@@ -38,7 +38,7 @@ export default async function NewEventPage() {
   return (
     <div className="flex flex-col gap-5">
       <nav className="mono flex items-center gap-1.5 text-[0.6875rem] text-ink-3" aria-label="Breadcrumb">
-        <Link href="/admin/events" className="hover:text-brass">
+        <Link href="/admin/events" className="hover:text-accent">
           Events
         </Link>
         <span aria-hidden="true">/</span>

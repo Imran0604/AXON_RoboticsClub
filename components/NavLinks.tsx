@@ -24,7 +24,7 @@ export function NavLinks({ links }: { links: NavLink[] }) {
             {active && (
               <span
                 className="absolute inset-x-2.5 -bottom-[11px] h-[2px] rounded-full"
-                style={{ background: "var(--brass)" }}
+                style={{ background: "var(--accent)" }}
               />
             )}
           </Link>

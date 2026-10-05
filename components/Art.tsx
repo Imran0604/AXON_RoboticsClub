@@ -56,17 +56,17 @@ function Hardware(r: Rnd) {
           key={i}
           d={d}
           fill="none"
-          stroke="var(--navy)"
+          stroke="var(--art-line)"
           strokeWidth={i % 3 === 0 ? 2.4 : 1.3}
           strokeLinejoin="round"
           opacity={0.22 + (i % 3) * 0.1}
         />
       ))}
       {pads.map(([x, y], i) => (
-        <circle key={i} cx={x} cy={y} r={i % 2 ? 4.5 : 3} fill="none" stroke="var(--brass)" strokeWidth="1.8" />
+        <circle key={i} cx={x} cy={y} r={i % 2 ? 4.5 : 3} fill="none" stroke="var(--art-hot)" strokeWidth="1.8" />
       ))}
-      <circle cx={W * 0.72} cy={H * 0.5} r="46" fill="none" stroke="var(--brass)" strokeWidth="2" opacity="0.5" />
-      <circle cx={W * 0.72} cy={H * 0.5} r="7" fill="var(--brass)" />
+      <circle cx={W * 0.72} cy={H * 0.5} r="46" fill="none" stroke="var(--art-hot)" strokeWidth="2" opacity="0.5" />
+      <circle cx={W * 0.72} cy={H * 0.5} r="7" fill="var(--art-hot)" />
     </>
   );
 }
@@ -85,22 +85,22 @@ function Drone(r: Rnd) {
   return (
     <>
       {corners.map(([x, y], i) => (
-        <line key={`a${i}`} x1={cx} y1={cy} x2={x} y2={y} stroke="var(--navy)" strokeWidth="5" strokeLinecap="round" opacity="0.45" />
+        <line key={`a${i}`} x1={cx} y1={cy} x2={x} y2={y} stroke="var(--art-line)" strokeWidth="5" strokeLinecap="round" opacity="0.45" />
       ))}
       {corners.map(([x, y], i) => (
         <g key={`r${i}`}>
-          <circle cx={x} cy={y} r={34 + r() * 5} fill="none" stroke="var(--navy)" strokeWidth="1.4" opacity="0.3" />
-          <circle cx={x} cy={y} r="9" fill="none" stroke="var(--brass)" strokeWidth="2.2" />
+          <circle cx={x} cy={y} r={34 + r() * 5} fill="none" stroke="var(--art-line)" strokeWidth="1.4" opacity="0.3" />
+          <circle cx={x} cy={y} r="9" fill="none" stroke="var(--art-hot)" strokeWidth="2.2" />
           <path
             d={`M ${x - 30} ${y} Q ${x} ${y - 13} ${x + 30} ${y}`}
             fill="none"
-            stroke="var(--brass)"
+            stroke="var(--art-hot)"
             strokeWidth="1.6"
             opacity="0.75"
           />
         </g>
       ))}
-      <rect x={cx - 26} y={cy - 17} width="52" height="34" rx="4" fill="none" stroke="var(--navy)" strokeWidth="2.4" />
+      <rect x={cx - 26} y={cy - 17} width="52" height="34" rx="4" fill="none" stroke="var(--art-line)" strokeWidth="2.4" />
     </>
   );
 }
@@ -132,7 +132,7 @@ function Network(r: Rnd) {
           y1={a.y}
           x2={b.x}
           y2={b.y}
-          stroke={w > 0.78 ? "var(--brass)" : "var(--navy)"}
+          stroke={w > 0.78 ? "var(--art-hot)" : "var(--art-line)"}
           strokeWidth={w > 0.78 ? 1.7 : 0.9}
           opacity={w > 0.78 ? 0.7 : 0.26}
         />
@@ -143,8 +143,8 @@ function Network(r: Rnd) {
           cx={n.x}
           cy={n.y}
           r={i % 5 === 0 ? 7 : 5}
-          fill={i % 5 === 0 ? "var(--brass)" : "var(--surface)"}
-          stroke="var(--navy)"
+          fill={i % 5 === 0 ? "var(--art-hot)" : "var(--surface)"}
+          stroke="var(--art-line)"
           strokeWidth="2"
         />
       ))}
@@ -162,8 +162,8 @@ function Code(r: Rnd) {
   }));
   return (
     <>
-      <path d="M 44 36 Q 24 36 24 60 L 24 240 Q 24 264 44 264" fill="none" stroke="var(--brass)" strokeWidth="3" strokeLinecap="round" />
-      <path d={`M ${W - 44} 36 Q ${W - 24} 36 ${W - 24} 60 L ${W - 24} 240 Q ${W - 24} 264 ${W - 44} 264`} fill="none" stroke="var(--brass)" strokeWidth="3" strokeLinecap="round" />
+      <path d="M 44 36 Q 24 36 24 60 L 24 240 Q 24 264 44 264" fill="none" stroke="var(--art-hot)" strokeWidth="3" strokeLinecap="round" />
+      <path d={`M ${W - 44} 36 Q ${W - 24} 36 ${W - 24} 60 L ${W - 24} 240 Q ${W - 24} 264 ${W - 44} 264`} fill="none" stroke="var(--art-hot)" strokeWidth="3" strokeLinecap="round" />
       {bars.map((b, i) => (
         <rect
           key={i}
@@ -172,7 +172,7 @@ function Code(r: Rnd) {
           width={b.w}
           height="7"
           rx="3.5"
-          fill={b.hot ? "var(--brass)" : "var(--navy)"}
+          fill={b.hot ? "var(--art-hot)" : "var(--art-line)"}
           opacity={b.hot ? 0.85 : 0.2 + (i % 3) * 0.08}
         />
       ))}
@@ -190,15 +190,15 @@ function Bench(r: Rnd) {
   return (
     <>
       {Array.from({ length: 9 }, (_, i) => (
-        <line key={`v${i}`} x1={i * 50} y1="0" x2={i * 50} y2={H} stroke="var(--navy)" strokeWidth="1" opacity="0.14" />
+        <line key={`v${i}`} x1={i * 50} y1="0" x2={i * 50} y2={H} stroke="var(--art-line)" strokeWidth="1" opacity="0.14" />
       ))}
       {Array.from({ length: 7 }, (_, i) => (
-        <line key={`h${i}`} x1="0" y1={i * 50} x2={W} y2={i * 50} stroke="var(--navy)" strokeWidth="1" opacity="0.14" />
+        <line key={`h${i}`} x1="0" y1={i * 50} x2={W} y2={i * 50} stroke="var(--art-line)" strokeWidth="1" opacity="0.14" />
       ))}
-      <polyline points={pts} fill="none" stroke="var(--brass)" strokeWidth="2.6" strokeLinejoin="round" strokeLinecap="round" />
-      <line x1="30" y1={H - 40} x2={W - 30} y2={H - 40} stroke="var(--navy)" strokeWidth="2" opacity="0.5" />
+      <polyline points={pts} fill="none" stroke="var(--art-hot)" strokeWidth="2.6" strokeLinejoin="round" strokeLinecap="round" />
+      <line x1="30" y1={H - 40} x2={W - 30} y2={H - 40} stroke="var(--art-line)" strokeWidth="2" opacity="0.5" />
       {Array.from({ length: 8 }, (_, i) => (
-        <line key={`t${i}`} x1={30 + i * ((W - 60) / 7)} y1={H - 40} x2={30 + i * ((W - 60) / 7)} y2={H - (i % 2 ? 50 : 56)} stroke="var(--navy)" strokeWidth="1.6" opacity="0.5" />
+        <line key={`t${i}`} x1={30 + i * ((W - 60) / 7)} y1={H - 40} x2={30 + i * ((W - 60) / 7)} y2={H - (i % 2 ? 50 : 56)} stroke="var(--art-line)" strokeWidth="1.6" opacity="0.5" />
       ))}
     </>
   );
@@ -219,25 +219,25 @@ function Isometric(r: Rnd) {
   const poly = (p: [number, number][]) => p.map(([x, y]) => `${x},${y}`).join(" ");
   return (
     <>
-      <polygon points={poly(top)} fill="var(--navy-soft)" stroke="var(--navy)" strokeWidth="2" />
+      <polygon points={poly(top)} fill="var(--surface-3)" stroke="var(--art-line)" strokeWidth="2" />
       <polygon
         points={poly([top[3], top[2], [top[2][0], top[2][1] + 68], [top[3][0], top[3][1] + 68]])}
         fill="none"
-        stroke="var(--navy)"
+        stroke="var(--art-line)"
         strokeWidth="2"
         opacity="0.6"
       />
       <polygon
         points={poly([top[2], top[1], [top[1][0], top[1][1] + 68], [top[2][0], top[2][1] + 68]])}
         fill="none"
-        stroke="var(--brass)"
+        stroke="var(--art-hot)"
         strokeWidth="2"
         opacity="0.9"
       />
       {Array.from({ length: 4 }, (_, i) => (
-        <circle key={i} cx={top[i][0]} cy={top[i][1]} r="4" fill="var(--brass)" />
+        <circle key={i} cx={top[i][0]} cy={top[i][1]} r="4" fill="var(--art-hot)" />
       ))}
-      <line x1={cx - 110} y1={cy + 76} x2={cx + 110} y2={cy + 76} stroke="var(--navy)" strokeWidth="1" opacity="0.3" strokeDasharray="4 4" />
+      <line x1={cx - 110} y1={cy + 76} x2={cx + 110} y2={cy + 76} stroke="var(--art-line)" strokeWidth="1" opacity="0.3" strokeDasharray="4 4" />
       <text x={cx} y={cy + 92} textAnchor="middle" fontSize="11" fill="var(--ink-3)" fontFamily="monospace">
         {`${Math.round(60 + r() * 80)}.0 mm`}
       </text>
@@ -261,7 +261,7 @@ function Arena(r: Rnd) {
           key={i}
           points={hex(rad)}
           fill="none"
-          stroke={i === 1 ? "var(--brass)" : "var(--navy)"}
+          stroke={i === 1 ? "var(--art-hot)" : "var(--art-line)"}
           strokeWidth={i === 1 ? 2.4 : 1.4}
           opacity={i === 1 ? 0.9 : 0.3 - i * 0.04 + 0.2}
         />
@@ -269,10 +269,10 @@ function Arena(r: Rnd) {
       {Array.from({ length: 6 }, (_, i) => {
         const a = (Math.PI / 3) * i - Math.PI / 6;
         return (
-          <circle key={i} cx={cx + Math.cos(a) * 118} cy={cy + Math.sin(a) * 118} r={r() > 0.5 ? 5 : 3.5} fill="var(--brass)" />
+          <circle key={i} cx={cx + Math.cos(a) * 118} cy={cy + Math.sin(a) * 118} r={r() > 0.5 ? 5 : 3.5} fill="var(--art-hot)" />
         );
       })}
-      <polygon points={hex(16)} fill="var(--navy)" opacity="0.8" />
+      <polygon points={hex(16)} fill="var(--art-line)" opacity="0.8" />
     </>
   );
 }
@@ -294,15 +294,15 @@ function Radial(r: Rnd) {
             y1={cy + Math.sin(a) * inner}
             x2={cx + Math.cos(a) * outer}
             y2={cy + Math.sin(a) * outer}
-            stroke={i % 4 === 0 ? "var(--brass)" : "var(--navy)"}
+            stroke={i % 4 === 0 ? "var(--art-hot)" : "var(--art-line)"}
             strokeWidth={i % 4 === 0 ? 2.6 : 1.3}
             opacity={i % 4 === 0 ? 0.85 : 0.28}
             strokeLinecap="round"
           />
         );
       })}
-      <circle cx={cx} cy={cy} r="26" fill="none" stroke="var(--navy)" strokeWidth="2.6" />
-      <circle cx={cx} cy={cy} r="9" fill="var(--brass)" />
+      <circle cx={cx} cy={cy} r="26" fill="none" stroke="var(--art-line)" strokeWidth="2.6" />
+      <circle cx={cx} cy={cy} r="9" fill="var(--art-hot)" />
     </>
   );
 }

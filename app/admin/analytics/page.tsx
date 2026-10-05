@@ -50,7 +50,7 @@ export default async function AnalyticsPage() {
         <StatTile label="Seat fill rate" value={`${fillRate}%`} sub={`${takenSeats} of ${totalSeats} seats`} tone={fillRate >= 80 ? "warn" : "ok"} />
         <StatTile label="Avg per event" value={avgPerEvent} sub="Registrations per event" />
         <StatTile label="Unique participants" value={stats.total_participants} sub="Distinct accounts registered" />
-        <StatTile label="Fees collected" value={fmtFee(stats.revenue_bdt)} sub="Confirmed + checked in" tone="brass" />
+        <StatTile label="Fees collected" value={fmtFee(stats.revenue_bdt)} sub="Confirmed + checked in" tone="accent" />
       </section>
 
       <section className="card p-4 sm:p-5">
@@ -96,7 +96,7 @@ export default async function AnalyticsPage() {
                         className="block h-full rounded-sm"
                         style={{
                           width: `${Math.max(1.5, pct)}%`,
-                          background: "var(--navy)",
+                          background: "var(--brand)",
                           opacity: 1 - i * 0.16,
                         }}
                       />
@@ -113,7 +113,7 @@ export default async function AnalyticsPage() {
               <StatusStrip
                 segments={[
                   { label: "Confirmed", value: stats.confirmed, color: "var(--ok)" },
-                  { label: "Checked in", value: stats.checked_in, color: "var(--brass)" },
+                  { label: "Checked in", value: stats.checked_in, color: "var(--accent)" },
                   { label: "Pending", value: stats.pending, color: "var(--warn)" },
                   { label: "Waitlisted", value: stats.waitlisted, color: "var(--info)" },
                   { label: "Cancelled", value: stats.cancelled, color: "var(--ink-3)" },
@@ -179,7 +179,7 @@ export default async function AnalyticsPage() {
                     <td>
                       <Link
                         href={`/admin/registrations?event=${e.slug}`}
-                        className="mono text-[0.6875rem] font-semibold text-navy hover:text-brass"
+                        className="mono text-[0.6875rem] font-semibold text-brand hover:text-accent"
                       >
                         View →
                       </Link>

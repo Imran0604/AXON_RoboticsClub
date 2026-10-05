@@ -264,7 +264,7 @@ export default async function JudgePage() {
             <section key={section.title}>
               <div className="flex flex-wrap items-baseline gap-3 border-b border-line pb-2.5">
                 <h2 className="text-[1.375rem] font-extrabold">{section.title}</h2>
-                <span className="badge badge-brass">{section.total} pts</span>
+                <span className="badge badge-accent">{section.total} pts</span>
               </div>
 
               <ol className="mt-4 flex flex-col gap-2.5">
@@ -294,7 +294,7 @@ export default async function JudgePage() {
           <section>
             <div className="flex flex-wrap items-baseline gap-3 border-b border-line pb-2.5">
               <h2 className="text-[1.375rem] font-extrabold">Beyond the requirements</h2>
-              <span className="badge badge-brass">Bonus · 30 pts</span>
+              <span className="badge badge-accent">Bonus · 30 pts</span>
             </div>
 
             <div className="mt-4 grid gap-3 lg:grid-cols-2">
@@ -304,7 +304,7 @@ export default async function JudgePage() {
                   <p className="text-[0.875rem] leading-relaxed text-ink-2">{b.body}</p>
                   <Link
                     href={b.href}
-                    className="mono mt-auto inline-block text-[0.6875rem] font-semibold text-navy hover:text-brass"
+                    className="mono mt-auto inline-block text-[0.6875rem] font-semibold text-brand hover:text-accent"
                   >
                     {b.linkLabel} →
                   </Link>
@@ -355,7 +355,7 @@ export default async function JudgePage() {
 
             <div
               className="mt-4 rounded border px-4 py-3.5"
-              style={{ background: "var(--brass-soft)", borderColor: "var(--brass)" }}
+              style={{ background: "var(--accent-soft)", borderColor: "var(--accent)" }}
             >
               <p className="text-[0.875rem] leading-relaxed text-ink-2">
                 <strong className="font-semibold text-ink">Known limitations</strong> are listed

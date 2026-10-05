@@ -78,7 +78,7 @@ export function LoginForm({ next }: { next: string }) {
 
       <p className="text-center text-[0.8125rem] text-ink-2">
         No account yet?{" "}
-        <Link href={`/signup?next=${encodeURIComponent(next)}`} className="font-semibold text-navy hover:text-brass">
+        <Link href={`/signup?next=${encodeURIComponent(next)}`} className="font-semibold text-brand hover:text-accent">
           Create one
         </Link>
       </p>
@@ -173,7 +173,7 @@ export function SignupForm({ next }: { next: string }) {
 
       <p className="text-center text-[0.8125rem] text-ink-2">
         Already registered?{" "}
-        <Link href={`/login?next=${encodeURIComponent(next)}`} className="font-semibold text-navy hover:text-brass">
+        <Link href={`/login?next=${encodeURIComponent(next)}`} className="font-semibold text-brand hover:text-accent">
           Sign in
         </Link>
       </p>

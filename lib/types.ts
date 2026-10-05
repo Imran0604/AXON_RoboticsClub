@@ -132,7 +132,7 @@ export const FEST_PHASE_LABEL: Record<FestPhase, string> = {
 };
 
 export const FEST_PHASE_TONE: Record<FestPhase, string> = {
-  upcoming: "badge-navy",
+  upcoming: "badge-brand",
   ongoing: "badge-ok",
   past: "badge-neutral",
 };
@@ -187,7 +187,7 @@ export const REG_STATUS_TONE: Record<RegStatus, string> = {
   waitlisted: "badge-info",
   rejected: "badge-crit",
   cancelled: "badge-neutral",
-  checked_in: "badge-brass",
+  checked_in: "badge-accent",
 };
 
 /** Statuses that occupy a seat. Mirrors seats_taken() in schema.sql. */

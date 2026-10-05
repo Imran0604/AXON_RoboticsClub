@@ -99,7 +99,7 @@ export function EventCardTile({ event, showFest = true }: { event: EventCardData
       <Link href={`/events/${event.slug}`} className="block focus-visible:outline-offset-[-2px]">
         <div className="relative h-32 overflow-hidden border-b border-line">
           <Art seed={event.art_seed} category={event.category} className="h-full w-full" />
-          <span className="badge badge-navy absolute left-2.5 top-2.5 backdrop-blur-sm">
+          <span className="badge badge-brand absolute left-2.5 top-2.5 backdrop-blur-sm">
             {event.category}
           </span>
           {event.fee_bdt === 0 && (
@@ -111,12 +111,12 @@ export function EventCardTile({ event, showFest = true }: { event: EventCardData
       <div className="flex flex-1 flex-col gap-2.5 p-3.5">
         <div>
           {showFest && (
-            <Link href={`/fests/${event.fest_slug}`} className="eyebrow hover:text-brass">
+            <Link href={`/fests/${event.fest_slug}`} className="eyebrow hover:text-accent">
               {event.fest_name}
             </Link>
           )}
           <h3 className="mt-1 text-[0.9375rem] font-bold leading-snug">
-            <Link href={`/events/${event.slug}`} className="hover:text-navy">
+            <Link href={`/events/${event.slug}`} className="hover:text-brand">
               {event.title}
             </Link>
           </h3>
@@ -148,7 +148,7 @@ export function EventCardTile({ event, showFest = true }: { event: EventCardData
             )}
             <Link
               href={`/events/${event.slug}`}
-              className="mono text-[0.6875rem] font-semibold text-navy group-hover:text-brass"
+              className="mono text-[0.6875rem] font-semibold text-brand group-hover:text-accent"
             >
               Details →
             </Link>

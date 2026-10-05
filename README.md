@@ -95,7 +95,9 @@ locks the event row, so two people racing for the last seat cannot both win it.
 - **Audit log** of every privileged mutation with its actor and timestamp.
 
 ### Throughout
-- **Three-state theme control** (system / light / dark) with no flash on load.
+- **Dark-first design** in warm graphite and molten orange, with a light theme available from the
+  toggle. Dark is the unconditional default rather than inferred from the OS — a deliberate choice,
+  so the identity is the same for everyone — and there is no flash on load.
 - **Fully responsive**, including the admin: the participants table becomes cards under 768px.
 - **Generated SVG artwork** — all 16 event posters and 4 fest banners are drawn deterministically
   from each record's art seed and category, in eight motifs drawn from each discipline's visual
@@ -104,13 +106,25 @@ locks the event row, so two people racing for the last seat cannot both win it.
   focus rings, `prefers-reduced-motion` respected, and status always carried by text as well as
   colour.
 
+### Design notes
+
+- **Dark-first, border-led.** Depth comes from hairlines rather than shadows, which keeps the
+  interface flat and dense — closer to an instrument panel than a marketing page.
+- **The hero does something.** Instead of a decorative banner it carries a live status line, the
+  thesis as a headline, and a working event search, so the first element on the page is functional.
+- **The status palette was computed, not chosen by eye.** An orange brand accent sits in the same
+  hue family as a conventional amber "warning" and red "error", so those were re-stepped to pure
+  yellow and magenta-red and re-validated for contrast and colour-blind separation. The one pair
+  no palette can fix — success-green against error-red under deuteranopia — is why every status in
+  this app also carries a text label and never relies on colour alone.
+
 ## 4. Tech stack
 
 | Layer | Choice | Why |
 |---|---|---|
 | Framework | **Next.js 16** (App Router), React 19 | Server Components keep database queries on the server; Server Functions remove the need for a separate API layer |
 | Language | **TypeScript** (strict) | The whole project typechecks with zero errors |
-| Styling | **Tailwind CSS v4** + a token layer | Semantic CSS custom properties flip per theme, so no component needs a `dark:` variant |
+| Styling | **Tailwind CSS v4** + a token layer | Semantic CSS custom properties flip per theme, so no component needs a `dark:` variant and the whole palette is swappable from one file |
 | Database | **PostgreSQL** (Supabase) | Real transactions and row locks, which the capacity rule depends on |
 | DB client | **postgres.js** | Tagged-template SQL — readable in review, parameterised by construction |
 | Auth | Hand-rolled: **jose** (JWT) + **bcryptjs** | No email-verification wall between a judge and the app, and authorization readable in one file |
@@ -224,7 +238,7 @@ Screenshots live in `docs/screenshots/`. Capture these twelve to cover every sco
 | 09 | Registration form builder | `/admin/events/<id>` |
 | 10 | Check-in scanner | `/admin/scan` |
 | 11 | Mobile layout (375px wide) | `/events` and `/admin/registrations` |
-| 12 | Dark mode | any route, theme toggle set to dark |
+| 12 | Light theme | any route, theme toggle switched to light |
 
 ## 11. Known limitations
 

@@ -29,7 +29,7 @@ export function StatTile({
   label: string;
   value: string | number;
   sub?: string;
-  tone?: "default" | "ok" | "warn" | "crit" | "brass";
+  tone?: "default" | "ok" | "warn" | "crit" | "accent";
 }) {
   const color =
     tone === "ok"
@@ -38,8 +38,8 @@ export function StatTile({
         ? "var(--warn)"
         : tone === "crit"
           ? "var(--crit)"
-          : tone === "brass"
-            ? "var(--brass)"
+          : tone === "accent"
+            ? "var(--accent)"
             : "var(--ink)";
 
   return (
@@ -101,8 +101,8 @@ export function TimeSeries({
       >
         <defs>
           <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="var(--navy)" stopOpacity="0.22" />
-            <stop offset="100%" stopColor="var(--navy)" stopOpacity="0.01" />
+            <stop offset="0%" stopColor="var(--brand)" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="var(--brand)" stopOpacity="0.01" />
           </linearGradient>
         </defs>
 
@@ -117,7 +117,7 @@ export function TimeSeries({
         ))}
 
         <path d={area} fill={`url(#${gradId})`} />
-        <path d={line} fill="none" stroke="var(--navy)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+        <path d={line} fill="none" stroke="var(--brand)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
 
         {/* emphasised endpoint */}
         {data.length > 0 && (
@@ -125,7 +125,7 @@ export function TimeSeries({
             cx={x(data.length - 1)}
             cy={y(data[data.length - 1].count)}
             r="4"
-            fill="var(--navy)"
+            fill="var(--brand)"
             stroke="var(--surface)"
             strokeWidth="2"
           />
@@ -147,8 +147,8 @@ export function TimeSeries({
         {/* crosshair */}
         {hover !== null && (
           <g>
-            <line x1={x(hover)} y1={pad.t} x2={x(hover)} y2={y(0)} stroke="var(--brass)" strokeWidth="1" strokeDasharray="3 3" />
-            <circle cx={x(hover)} cy={y(data[hover].count)} r="4.5" fill="var(--brass)" stroke="var(--surface)" strokeWidth="2" />
+            <line x1={x(hover)} y1={pad.t} x2={x(hover)} y2={y(0)} stroke="var(--accent)" strokeWidth="1" strokeDasharray="3 3" />
+            <circle cx={x(hover)} cy={y(data[hover].count)} r="4.5" fill="var(--accent)" stroke="var(--surface)" strokeWidth="2" />
           </g>
         )}
 
@@ -211,7 +211,7 @@ export function BarList({
               className="absolute inset-y-0 left-0 rounded-sm"
               style={{
                 width: `${Math.max(1.5, (d.value / max) * 100)}%`,
-                background: "var(--navy)",
+                background: "var(--brand)",
               }}
             />
           </span>

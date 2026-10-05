@@ -60,8 +60,8 @@ export function MobileMenu({ links, children }: { links: NavLink[]; children?: R
                   href={l.href}
                   className="rounded-sm px-3 py-2.5 text-[0.9375rem] font-medium transition-colors"
                   style={{
-                    background: active ? "var(--navy-soft)" : "transparent",
-                    color: active ? "var(--navy)" : "var(--ink)",
+                    background: active ? "var(--brand-soft)" : "transparent",
+                    color: active ? "var(--brand)" : "var(--ink)",
                   }}
                 >
                   {l.label}

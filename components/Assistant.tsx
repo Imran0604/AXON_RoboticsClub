@@ -73,30 +73,62 @@ export function Assistant() {
   return (
     <>
       {/* launcher */}
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        aria-label={open ? "Close the event assistant" : "Open the event assistant"}
-        className="fixed bottom-5 right-5 z-[60] flex h-12 items-center gap-2 rounded-full border px-4 transition-transform hover:scale-[1.03]"
-        style={{
-          background: "var(--brand)",
-          borderColor: "var(--brand)",
-          color: "var(--on-brand)",
-          boxShadow: "0 8px 30px -8px var(--glow)",
-        }}
-      >
-        {open ? (
-          <svg viewBox="0 0 16 16" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <path d="M4 4l8 8M12 4l-8 8" strokeLinecap="round" />
-          </svg>
-        ) : (
-          <svg viewBox="0 0 16 16" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
-            <path d="M14 10.5a1.8 1.8 0 0 1-1.8 1.8H5.5L2 15V3.8A1.8 1.8 0 0 1 3.8 2h8.4A1.8 1.8 0 0 1 14 3.8Z" strokeLinejoin="round" />
-          </svg>
+      <div className="group/launch fixed bottom-5 right-5 z-[60] flex flex-col items-end gap-2">
+        {/* Hover label, so the robot is not a mystery glyph on first visit. */}
+        {!open && (
+          <span
+            className="pointer-events-none hidden rounded-full border px-2.5 py-1 text-[0.6875rem] font-semibold opacity-0 transition-opacity duration-150 group-hover/launch:opacity-100 sm:block"
+            style={{ background: "var(--surface)", borderColor: "var(--line-2)", color: "var(--ink-2)" }}
+            aria-hidden="true"
+          >
+            Ask about events
+          </span>
         )}
-        <span className="text-[0.8125rem] font-semibold">{open ? "Close" : "Ask about events"}</span>
-      </button>
+
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-label={open ? "Close the event assistant" : "Open the event assistant"}
+          title={open ? "Close the event assistant" : "Ask about events"}
+          className="relative grid h-14 w-14 place-items-center rounded-full border transition-transform duration-150 hover:scale-[1.06] active:scale-95"
+          style={{
+            background: "var(--brand)",
+            borderColor: "var(--brand)",
+            color: "var(--on-brand)",
+            boxShadow: "0 10px 34px -8px var(--glow)",
+          }}
+        >
+          {/* Attention ring — one slow pulse, and only while closed. */}
+          {!open && (
+            <span
+              className="absolute inset-0 rounded-full"
+              style={{
+                border: "2px solid var(--brand)",
+                animation: "ping-ring 2.6s cubic-bezier(0, 0, 0.2, 1) infinite",
+              }}
+              aria-hidden="true"
+            />
+          )}
+
+          {open ? (
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+            </svg>
+          ) : (
+            /* Robot: antenna, visor with two eyes, and a small mouth. */
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" aria-hidden="true">
+              <path d="M12 3.4V6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <circle cx="12" cy="2.5" r="1.4" fill="currentColor" />
+              <rect x="3.6" y="6" width="16.8" height="13" rx="4.2" stroke="currentColor" strokeWidth="1.8" />
+              <path d="M1.5 11v3M22.5 11v3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <circle cx="9" cy="11.6" r="1.6" fill="currentColor" />
+              <circle cx="15" cy="11.6" r="1.6" fill="currentColor" />
+              <path d="M9.4 15.4h5.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            </svg>
+          )}
+        </button>
+      </div>
 
       {/* panel */}
       {open && (

@@ -169,6 +169,23 @@
 }
 
 /* ===========================================================================
+   Everything below lives in the `components` layer.
+
+   This matters more than it looks. Tailwind v4 orders its layers
+   theme → base → components → utilities, and an unlayered rule beats a
+   layered one no matter where it sits in the file. These component classes
+   were previously unlayered and emitted after Tailwind's utilities, so
+   `.btn { display: inline-flex }` quietly won against `md:hidden` — the mobile
+   menu button stayed visible on desktop and every other utility that collided
+   with a component class lost the same way.
+
+   Putting them in `components` puts utilities back on top, which is the whole
+   contract Tailwind classes are written against.
+   =========================================================================== */
+
+@layer components {
+
+/* ===========================================================================
    Base
    =========================================================================== */
 
@@ -670,6 +687,19 @@ table.data tbody tr:hover {
    Entrance motion — one orchestrated reveal, not scattered effects
    =========================================================================== */
 
+/* Expanding ring behind the assistant launcher. */
+@keyframes ping-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70%,
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
 @keyframes caret {
   0%,
   50% {
@@ -714,3 +744,5 @@ table.data tbody tr:hover {
   scrollbar-color: var(--line-2) transparent;
   scrollbar-width: thin;
 }
+
+} /* end @layer components */

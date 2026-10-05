@@ -50,7 +50,7 @@ export function MobileMenu({ links, children }: { links: NavLink[]; children?: R
       </button>
 
       {open && (
-        <div className="fixed inset-x-0 top-[57px] bottom-0 z-40 overflow-y-auto border-t border-line bg-bg px-5 py-5 md:hidden">
+        <div className="fixed inset-x-0 top-[57px] bottom-0 z-[70] overflow-y-auto border-t border-line bg-bg px-5 py-5 md:hidden">
           <nav className="flex flex-col gap-1">
             {links.map((l) => {
               const active = pathname === l.href || (l.href !== "/" && pathname.startsWith(l.href));

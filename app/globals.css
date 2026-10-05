@@ -1,0 +1,665 @@
+@import "tailwindcss";
+
+/* ===========================================================================
+   AXON design system
+
+   Everything is driven by semantic tokens that flip per theme, so components
+   never hardcode a colour and never need a `dark:` variant. Three theme
+   states are supported: an explicit choice stamps data-theme on <html>, and
+   the default (nothing stamped) follows the operating system.
+
+   Palette rationale: signal navy and brass come from the club identity —
+   navy for structure and brass for the single accent. Neutrals carry a slight
+   blue bias so they sit with the navy rather than fighting it.
+   =========================================================================== */
+
+:root {
+  /* surfaces */
+  --bg: #eff1f3;
+  --surface: #ffffff;
+  --surface-2: #f5f7f9;
+  --surface-3: #e9edf1;
+
+  /* text */
+  --ink: #101820;
+  --ink-2: #46535f;
+  --ink-3: #6e7c89;
+
+  /* lines */
+  --line: #d7dde3;
+  --line-2: #bdc6cf;
+
+  /* brand */
+  --navy: #153049;
+  --navy-hover: #1d4066;
+  --on-navy: #ffffff;
+  --navy-soft: #e2eaf1;
+  --brass: #9a6e26;
+  --brass-soft: #f3eada;
+
+  /* semantic state — deliberately separate from the brand accent */
+  --ok: #16694a;
+  --ok-soft: #dcede4;
+  --warn: #8a5a0c;
+  --warn-soft: #f7ebd5;
+  --crit: #9b2a23;
+  --crit-soft: #f7e1df;
+  --info: #1b5a86;
+  --info-soft: #dfecf5;
+
+  --ring: #9a6e26;
+  --shadow-sm: 0 1px 2px rgba(16, 24, 32, 0.05);
+  --shadow: 0 1px 2px rgba(16, 24, 32, 0.05), 0 8px 24px -16px rgba(16, 24, 32, 0.22);
+  --shadow-lg: 0 2px 4px rgba(16, 24, 32, 0.06), 0 24px 48px -24px rgba(16, 24, 32, 0.3);
+
+  --r-sm: 4px;
+  --r: 6px;
+  --r-lg: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a1016;
+    --surface: #121a22;
+    --surface-2: #18222c;
+    --surface-3: #1f2b37;
+
+    --ink: #e3e9ee;
+    --ink-2: #95a2ad;
+    --ink-3: #707d89;
+
+    --line: #24303b;
+    --line-2: #35434f;
+
+    --navy: #8fb4d6;
+    --navy-hover: #a6c4df;
+    --on-navy: #0a1016;
+    --navy-soft: #16252f;
+    --brass: #d8a850;
+    --brass-soft: #28210f;
+
+    --ok: #4fc08d;
+    --ok-soft: #11291f;
+    --warn: #daa63f;
+    --warn-soft: #292009;
+    --crit: #e4786e;
+    --crit-soft: #2c1715;
+    --info: #68aedc;
+    --info-soft: #0f2330;
+
+    --ring: #d8a850;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -16px rgba(0, 0, 0, 0.8);
+    --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.5), 0 24px 48px -24px rgba(0, 0, 0, 0.9);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0a1016;
+  --surface: #121a22;
+  --surface-2: #18222c;
+  --surface-3: #1f2b37;
+
+  --ink: #e3e9ee;
+  --ink-2: #95a2ad;
+  --ink-3: #707d89;
+
+  --line: #24303b;
+  --line-2: #35434f;
+
+  --navy: #8fb4d6;
+  --navy-hover: #a6c4df;
+  --on-navy: #0a1016;
+  --navy-soft: #16252f;
+  --brass: #d8a850;
+  --brass-soft: #28210f;
+
+  --ok: #4fc08d;
+  --ok-soft: #11291f;
+  --warn: #daa63f;
+  --warn-soft: #292009;
+  --crit: #e4786e;
+  --crit-soft: #2c1715;
+  --info: #68aedc;
+  --info-soft: #0f2330;
+
+  --ring: #d8a850;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px -16px rgba(0, 0, 0, 0.8);
+  --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.5), 0 24px 48px -24px rgba(0, 0, 0, 0.9);
+}
+
+/* Expose the tokens to Tailwind utilities (bg-surface, text-ink-2, …) */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+
+  --color-navy: var(--navy);
+  --color-navy-hover: var(--navy-hover);
+  --color-on-navy: var(--on-navy);
+  --color-navy-soft: var(--navy-soft);
+  --color-brass: var(--brass);
+  --color-brass-soft: var(--brass-soft);
+
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-crit: var(--crit);
+  --color-crit-soft: var(--crit-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  --radius-sm: var(--r-sm);
+  --radius-DEFAULT: var(--r);
+  --radius-lg: var(--r-lg);
+}
+
+/* ===========================================================================
+   Base
+   =========================================================================== */
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: -0.021em;
+  line-height: 1.15;
+  text-wrap: balance;
+  font-weight: 700;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+::selection {
+  background: var(--brass);
+  color: var(--surface);
+}
+
+/* Tabular figures everywhere digits are compared or stacked. */
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===========================================================================
+   Typographic utilities
+   =========================================================================== */
+
+.eyebrow {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.mono {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.prose-body {
+  max-width: 68ch;
+}
+
+.prose-body p + p {
+  margin-top: 0.85em;
+}
+
+/* ===========================================================================
+   Controls
+   =========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.625rem 1rem;
+  border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.14s, border-color 0.14s, color 0.14s, opacity 0.14s;
+  text-decoration: none;
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--navy);
+  color: var(--on-navy);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--navy-hover);
+}
+
+.btn-brass {
+  background: var(--brass);
+  color: var(--surface);
+}
+
+.btn-brass:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.btn-ghost {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line-2);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--surface-2);
+  border-color: var(--ink-3);
+}
+
+.btn-quiet {
+  background: transparent;
+  color: var(--ink-2);
+}
+
+.btn-quiet:hover:not(:disabled) {
+  background: var(--surface-2);
+  color: var(--ink);
+}
+
+.btn-danger {
+  background: var(--crit-soft);
+  color: var(--crit);
+  border-color: var(--crit);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: var(--crit);
+  color: var(--surface);
+}
+
+.btn-sm {
+  padding: 0.4rem 0.7rem;
+  font-size: 0.8125rem;
+}
+
+.btn-lg {
+  padding: 0.8rem 1.4rem;
+  font-size: 0.9375rem;
+}
+
+/* ===========================================================================
+   Form fields
+   =========================================================================== */
+
+.field {
+  display: block;
+  width: 100%;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-sm);
+  padding: 0.55rem 0.7rem;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  line-height: 1.5;
+  transition: border-color 0.14s, box-shadow 0.14s;
+}
+
+.field::placeholder {
+  color: var(--ink-3);
+}
+
+.field:focus {
+  outline: none;
+  border-color: var(--brass);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brass) 18%, transparent);
+}
+
+.field[aria-invalid="true"] {
+  border-color: var(--crit);
+}
+
+.field[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--crit) 18%, transparent);
+}
+
+select.field {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink-3) 50%),
+    linear-gradient(135deg, var(--ink-3) 50%, transparent 50%);
+  background-position: calc(100% - 15px) calc(50% + 1px), calc(100% - 10px) calc(50% + 1px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+.help {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  margin-top: 0.3rem;
+}
+
+.err {
+  font-size: 0.75rem;
+  color: var(--crit);
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+/* Native checkbox and radio, restyled rather than replaced, so keyboard and
+   screen-reader behaviour stays intact. */
+.check {
+  appearance: none;
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.12s, border-color 0.12s;
+}
+
+.check[type="radio"] {
+  border-radius: 50%;
+}
+
+.check:checked {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+.check[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid var(--on-navy);
+  border-width: 0 2px 2px 0;
+  transform: rotate(43deg);
+}
+
+.check[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--on-navy);
+}
+
+/* ===========================================================================
+   Surfaces
+   =========================================================================== */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+}
+
+.card-hover {
+  transition: border-color 0.16s, box-shadow 0.16s, transform 0.16s;
+}
+
+.card-hover:hover {
+  border-color: var(--line-2);
+  box-shadow: var(--shadow);
+}
+
+/* ===========================================================================
+   Badges — state is encoded in colour AND shape so it reads at a glance
+   =========================================================================== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.45rem;
+  border-radius: 3px;
+  border: 1px solid;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+.badge-neutral {
+  background: var(--surface-2);
+  color: var(--ink-2);
+  border-color: var(--line-2);
+}
+.badge-navy {
+  background: var(--navy-soft);
+  color: var(--navy);
+  border-color: color-mix(in srgb, var(--navy) 40%, transparent);
+}
+.badge-brass {
+  background: var(--brass-soft);
+  color: var(--brass);
+  border-color: color-mix(in srgb, var(--brass) 45%, transparent);
+}
+.badge-ok {
+  background: var(--ok-soft);
+  color: var(--ok);
+  border-color: color-mix(in srgb, var(--ok) 40%, transparent);
+}
+.badge-warn {
+  background: var(--warn-soft);
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 40%, transparent);
+}
+.badge-crit {
+  background: var(--crit-soft);
+  color: var(--crit);
+  border-color: color-mix(in srgb, var(--crit) 40%, transparent);
+}
+.badge-info {
+  background: var(--info-soft);
+  color: var(--info);
+  border-color: color-mix(in srgb, var(--info) 40%, transparent);
+}
+
+/* ===========================================================================
+   Technical grid texture — used behind hero areas. Replaces a stock photo
+   with something that costs 0 bytes of image payload.
+   =========================================================================== */
+
+.grid-texture {
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 36px 36px, 36px 36px;
+  background-position: -1px -1px;
+}
+
+.grid-fade {
+  position: relative;
+}
+
+.grid-fade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 20% 0%, transparent 10%, var(--bg) 75%);
+  pointer-events: none;
+}
+
+/* ===========================================================================
+   Capacity meter
+   =========================================================================== */
+
+.meter {
+  height: 5px;
+  border-radius: 3px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+
+.meter > span {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--ok);
+  transition: width 0.3s ease;
+}
+
+.meter[data-level="warn"] > span {
+  background: var(--warn);
+}
+
+.meter[data-level="full"] > span {
+  background: var(--crit);
+}
+
+/* ===========================================================================
+   Tables — scroll inside their own container, never the page body
+   =========================================================================== */
+
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+table.data th {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+table.data td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+table.data tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+table.data tbody tr:hover {
+  background: var(--surface-2);
+}
+
+/* ===========================================================================
+   Skeleton loading
+   =========================================================================== */
+
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface-3) 50%, var(--surface-2) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: var(--r-sm);
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* ===========================================================================
+   Entrance motion — one orchestrated reveal, not scattered effects
+   =========================================================================== */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Scrollbars that match the theme instead of punching a light hole in dark mode */
+* {
+  scrollbar-color: var(--line-2) transparent;
+  scrollbar-width: thin;
+}

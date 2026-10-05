@@ -67,6 +67,7 @@ const SHOTS = [
   ["13", "mobile-events", "/events", MOBILE, {}],
   ["14", "mobile-admin", "/admin/registrations", MOBILE, { as: "admin" }],
   ["15", "light-theme", "/", DESKTOP, { light: true }],
+  ["16", "mobile-menu", "/", MOBILE, { menu: true }],
 ];
 
 const USERS = {
@@ -150,11 +151,20 @@ for (const [n, name, path, viewport, opt] of SHOTS) {
   await page.evaluate(() => document.fonts?.ready);
   await sleep(opt.assistant ? 900 : 1400);
 
+  if (opt.menu) {
+    await page.evaluate(() => {
+      [...document.querySelectorAll("header button")]
+        .find((b) => /open menu/i.test(b.getAttribute("aria-label") || ""))
+        ?.click();
+    });
+    await sleep(600);
+  }
+
   if (opt.assistant) {
     // Open the panel and ask a real question, so the shot shows a real answer.
     await page.evaluate(() => {
       const btn = [...document.querySelectorAll("button")].find((b) =>
-        /ask about events/i.test(b.textContent || "")
+        /open the event assistant/i.test(b.getAttribute("aria-label") || "")
       );
       btn?.click();
     });

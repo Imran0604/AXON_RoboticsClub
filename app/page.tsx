@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { HeroSearch } from "@/components/HeroSearch";
+import { Particles } from "@/components/Particles";
+import { Typewriter } from "@/components/Typewriter";
 import { FestCardTile } from "@/components/FestCard";
 import { EventCardTile } from "@/components/EventCard";
 import { getDashboardStats, getFests, searchEvents } from "@/lib/queries";
@@ -21,12 +23,27 @@ export default async function HomePage() {
   return (
     <>
       {/* ---------------------------------------------------------------- Hero */}
-      <section className="relative overflow-hidden border-b border-line grid-texture glow">
-        <div className="relative z-10 mx-auto w-full max-w-[84rem] px-5 pb-14 pt-16 sm:pb-16 sm:pt-24">
-          {/* Live status line — the first thing on the page is a true fact
-              about right now, not a slogan. */}
+      <section className="relative overflow-hidden border-b border-line">
+        {/* Ambient layers, back to front: technical grid, drifting particle
+            field, then a radial glow that sinks the edges into the ground. */}
+        <div className="pointer-events-none absolute inset-0 grid-texture opacity-60" aria-hidden="true" />
+        <Particles />
+        <div
+          className="pointer-events-none absolute inset-0"
+          aria-hidden="true"
+          style={{
+            background:
+              "radial-gradient(90% 70% at 18% 25%, var(--glow), transparent 62%), radial-gradient(120% 100% at 50% 0%, transparent 35%, var(--bg) 92%)",
+          }}
+        />
+
+        <div className="relative z-10 mx-auto w-full max-w-[84rem] px-5 pb-16 pt-16 sm:pb-20 sm:pt-24">
+          {/* A true fact about right now, not a slogan. */}
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <span className="flex items-center gap-2 rounded-full border px-2.5 py-1" style={{ borderColor: "var(--line-2)" }}>
+            <span
+              className="flex items-center gap-2 rounded-full border px-2.5 py-1"
+              style={{ borderColor: "var(--line-2)", background: "color-mix(in srgb, var(--surface) 70%, transparent)" }}
+            >
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full rounded-full opacity-60" style={{ background: "var(--ok)" }} />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ background: "var(--ok)" }} />
@@ -38,34 +55,37 @@ export default async function HomePage() {
             <span className="eyebrow">AXON Robotics Club · Est. 2025</span>
           </div>
 
-          {/* Thesis. The brief's own complaint, answered in the headline. */}
-          <h1 className="rise mt-7 max-w-[20ch] text-[2.5rem] font-extrabold leading-[0.98] tracking-[-0.035em] sm:text-[4rem] lg:text-[4.75rem]">
-            Club operations
+          <h1 className="rise mt-7 max-w-[17ch] text-[2.5rem] font-extrabold leading-[0.98] tracking-[-0.035em] sm:text-[3.75rem] lg:text-[4.5rem]">
+            Smarter Club Operations.
             <br />
-            without the{" "}
             <span className="relative whitespace-nowrap" style={{ color: "var(--brand)" }}>
-              Google Form
+              Zero Spreadsheet
               <svg
-                className="absolute -bottom-1 left-0 w-full"
-                height="7"
-                viewBox="0 0 300 7"
+                className="absolute -bottom-1.5 left-0 w-full"
+                height="8"
+                viewBox="0 0 300 8"
                 preserveAspectRatio="none"
                 aria-hidden="true"
               >
-                <path d="M1 5.5 Q 150 1 299 5" fill="none" stroke="var(--brand)" strokeWidth="2.5" strokeLinecap="round" opacity="0.5" />
+                <path d="M1 6 Q 150 1.5 299 5.5" fill="none" stroke="var(--brand)" strokeWidth="2.5" strokeLinecap="round" opacity="0.5" />
               </svg>
-            </span>
-            .
+            </span>{" "}
+            Headaches.
           </h1>
 
-          <p
-            className="rise mt-7 max-w-xl text-[1.0625rem] leading-relaxed text-ink-2"
-            style={{ animationDelay: "60ms" }}
-          >
-            Browse every festival the club runs, explore the events inside each one, and register in
-            a form the organisers built themselves — with real capacity limits, real deadlines, and
-            a scannable ticket at the end of it.
-          </p>
+          <div className="rise mt-7 max-w-2xl" style={{ animationDelay: "60ms" }}>
+            <Typewriter
+              lead="One platform that handles"
+              phrases={[
+                "every fest and every event in it.",
+                "registration forms you build yourself.",
+                "capacity limits that actually hold.",
+                "waitlists that promote automatically.",
+                "QR tickets and check-in at the door.",
+                "payments recorded on the registration.",
+              ]}
+            />
+          </div>
 
           <div className="rise mt-8" style={{ animationDelay: "120ms" }}>
             <HeroSearch
@@ -83,8 +103,7 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          {/* Figures as a thin mono rail rather than boxed tiles — denser, and
-              it reads as instrumentation rather than marketing. */}
+          {/* Figures as a thin instrument rail rather than boxed tiles. */}
           <dl
             className="rise mt-14 flex flex-wrap gap-y-5 border-t pt-6"
             style={{ borderColor: "var(--line)", animationDelay: "200ms" }}
@@ -117,15 +136,15 @@ export default async function HomePage() {
               <path d="M8 1.5l2 4.4 4.5.5-3.4 3 1 4.6L8 11.7 3.9 14l1-4.6-3.4-3 4.5-.5L8 1.5Z" strokeLinejoin="round" />
             </svg>
             <div>
-              <p className="text-[0.875rem] font-semibold text-ink">Evaluating this project?</p>
+              <p className="text-[0.875rem] font-semibold text-ink">Reviewing this project?</p>
               <p className="text-[0.8125rem] leading-snug text-ink-2">
-                The judge page maps every rubric requirement to the exact page that demonstrates it,
-                with one-click logins for all three roles.
+                The reviewer guide walks every capability with a direct link to the page that
+                demonstrates it, plus one-click sign-in for all three roles.
               </p>
             </div>
           </div>
           <Link href="/judge" className="btn btn-accent btn-sm shrink-0 self-start sm:self-auto">
-            Open judge guide
+            Open reviewer guide
           </Link>
         </div>
       </aside>

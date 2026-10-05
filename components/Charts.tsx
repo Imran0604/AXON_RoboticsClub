@@ -29,11 +29,13 @@ export function StatTile({
   label: string;
   value: string | number;
   sub?: string;
-  tone?: "default" | "ok" | "warn" | "crit" | "accent";
+  tone?: "default" | "ok" | "done" | "warn" | "crit" | "accent";
 }) {
   const color =
     tone === "ok"
       ? "var(--ok)"
+      : tone === "done"
+        ? "var(--done)"
       : tone === "warn"
         ? "var(--warn)"
         : tone === "crit"

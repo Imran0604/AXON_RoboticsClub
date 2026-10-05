@@ -187,7 +187,7 @@ export const REG_STATUS_TONE: Record<RegStatus, string> = {
   waitlisted: "badge-info",
   rejected: "badge-crit",
   cancelled: "badge-neutral",
-  checked_in: "badge-accent",
+  checked_in: "badge-done",
 };
 
 /** Statuses that occupy a seat. Mirrors seats_taken() in schema.sql. */

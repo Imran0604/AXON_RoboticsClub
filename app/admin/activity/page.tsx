@@ -29,7 +29,7 @@ const PHRASING: Record<string, string> = {
 
 function tone(action: string): string {
   if (action.includes("reject") || action.includes("cancel") || action.includes("delete")) return "var(--crit)";
-  if (action.includes("checked_in")) return "var(--accent)";
+  if (action.includes("checked_in")) return "var(--done)";
   if (action.includes("confirm") || action.includes("created") || action.includes("signed_up")) return "var(--ok)";
   return "var(--info)";
 }

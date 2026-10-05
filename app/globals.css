@@ -14,63 +14,69 @@
    =========================================================================== */
 
 /* ---------------------------------------------------------------------------
-   Molten Orange — dark-first.
+   Deep Azure — dark-first.
 
-   Dark is the default (bare :root), not a media-query branch: this is a
-   deliberately dark design, and light is an opt-in the toggle stamps on.
-   That is why there is no prefers-color-scheme block here.
+   Sampled from the reference design: a near-black ground with a blue bias,
+   muted steel mid-tones, and one vivid azure that carries every glow, CTA and
+   highlight. Nearly three quarters of the reference's colour mass sits between
+   195 and 225 degrees of hue, so this is a deliberately monochromatic palette —
+   the accent is the only saturated thing on screen.
 
-   The status hues were chosen with a contrast and colour-blindness validator,
-   not by eye. Two constraints shaped them: they must separate from each other,
-   and "warn" must not collide with the orange brand. Amber lost that fight and
-   became pure yellow; red moved to magenta-red. The one pair that cannot be
-   fixed by choosing better values is success-green against error-red, which is
-   indistinguishable to deuteranopes in any palette — so every status in this
-   app also carries a text label, never colour alone.
+   Dark is the default (bare :root), not a media-query branch; light is an
+   opt-in the toggle stamps on.
+
+   Status hues were validated all-pairs for contrast and colour-blind
+   separation. An azure brand rules out a blue "waitlisted", so that moved to
+   violet, and "checked in" became a lighter step of the success green rather
+   than a sixth hue competing with the brand. The one pair no palette can fix —
+   success-green against error-red under deuteranopia — is why every status
+   also carries a text label and never relies on colour alone.
    --------------------------------------------------------------------------- */
 
 :root {
-  /* surfaces — warm-biased near-black, like anodised metal under low light */
-  --bg: #0d0b0a;
-  --surface: #16120f;
-  --surface-2: #1c1714;
-  --surface-3: #251e1a;
+  /* surfaces — near-black with a blue bias, like a darkened studio */
+  --bg: #05080e;
+  --surface: #0b111b;
+  --surface-2: #111a26;
+  --surface-3: #18232f;
 
-  /* text */
-  --ink: #f2ede9;
-  --ink-2: #b5a9a1;
-  --ink-3: #8a7d75;
+  /* text — cool off-white, never pure #fff */
+  --ink: #e8f1f5;
+  --ink-2: #93a6b5;
+  --ink-3: #66798a;
 
-  /* hairlines — this design is border-led, so these carry a lot of structure */
-  --line: #2a2320;
-  --line-2: #3a312c;
+  /* hairlines carry the structure in a shadowless design */
+  --line: #1b2735;
+  --line-2: #2a3948;
 
   /* brand */
-  --brand: #ff6b2c;
-  --brand-hover: #ff8550;
-  --on-brand: #140c07;
-  --brand-soft: #2a1710;
-  --accent: #ffb08a;
-  --accent-soft: #2a1c14;
+  --brand: #35a7e8;
+  --brand-hover: #5bbcf5;
+  --on-brand: #04131e;
+  --brand-soft: #0b2436;
+  --accent: #7fd4f5;
+  --accent-soft: #0a2130;
 
-  /* status — reserved, never reused as a brand or series colour */
+  /* status — reserved; never reused as a brand or series colour */
   --ok: #3fd28b;
-  --ok-soft: #0f2a1e;
-  --warn: #ffd93d;
-  --warn-soft: #2a2410;
-  --crit: #ff2d8a;
-  --crit-soft: #2c1020;
-  --info: #5ab8f0;
-  --info-soft: #0f2230;
+  --ok-soft: #0c2a1f;
+  --done: #8fe9c4;
+  --done-soft: #0e2b22;
+  --warn: #ffc53d;
+  --warn-soft: #2b2309;
+  --crit: #ff5d6e;
+  --crit-soft: #2c1217;
+  --info: #b08cff;
+  --info-soft: #1a142e;
 
-  /* generated artwork: a recessive structural line plus one hot highlight */
-  --art-line: #4a3f39;
-  --art-hot: #ff6b2c;
+  /* generated artwork: recessive structure plus one hot highlight */
+  --art-line: #2d3f52;
+  --art-hot: #35a7e8;
 
-  --ring: #ff6b2c;
-  --glow: rgba(255, 107, 44, 0.18);
+  --ring: #35a7e8;
+  --glow: rgba(53, 167, 232, 0.22);
 
-  /* Shadows are nearly absent by design — depth comes from hairlines. */
+  /* Depth comes from hairlines and glow, not drop shadows. */
   --shadow-sm: none;
   --shadow: 0 0 0 1px var(--line-2);
   --shadow-lg: 0 24px 60px -30px rgba(0, 0, 0, 0.9);
@@ -81,43 +87,45 @@
 }
 
 :root[data-theme="light"] {
-  --bg: #f7f5f3;
+  --bg: #f4f7fa;
   --surface: #ffffff;
-  --surface-2: #f2efec;
-  --surface-3: #e8e3de;
+  --surface-2: #eef3f8;
+  --surface-3: #e2eaf2;
 
-  --ink: #17120f;
-  --ink-2: #5a504a;
-  --ink-3: #857a72;
+  --ink: #0a1520;
+  --ink-2: #4a5b6b;
+  --ink-3: #76889a;
 
-  --line: #e0dad4;
-  --line-2: #c7beb6;
+  --line: #dce5ed;
+  --line-2: #bfcdda;
 
-  --brand: #c2410c;
-  --brand-hover: #a3340a;
+  --brand: #0b74b8;
+  --brand-hover: #095e96;
   --on-brand: #ffffff;
-  --brand-soft: #fdede4;
-  --accent: #9a5520;
-  --accent-soft: #fbeee4;
+  --brand-soft: #e3f1fb;
+  --accent: #0e86c9;
+  --accent-soft: #e1f0fa;
 
   --ok: #0e7a52;
-  --ok-soft: #dff2ea;
-  --warn: #9a7400;
-  --warn-soft: #fcf2d7;
-  --crit: #c01e68;
-  --crit-soft: #fce4ee;
-  --info: #1c6fa8;
-  --info-soft: #e3eff8;
+  --ok-soft: #ddf2e9;
+  --done: #0a6344;
+  --done-soft: #d6efe4;
+  --warn: #9a6e00;
+  --warn-soft: #fbf0d4;
+  --crit: #c0284a;
+  --crit-soft: #fce3e8;
+  --info: #6b3bc9;
+  --info-soft: #ece4fb;
 
-  --art-line: #c9bfb7;
-  --art-hot: #d9480f;
+  --art-line: #c2d2e0;
+  --art-hot: #0b74b8;
 
-  --ring: #c2410c;
-  --glow: rgba(194, 65, 12, 0.1);
+  --ring: #0b74b8;
+  --glow: rgba(11, 116, 184, 0.1);
 
   --shadow-sm: none;
   --shadow: 0 0 0 1px var(--line-2);
-  --shadow-lg: 0 20px 48px -28px rgba(23, 18, 15, 0.28);
+  --shadow-lg: 0 20px 48px -28px rgba(10, 21, 32, 0.25);
 }
 
 /* Expose the tokens to Tailwind utilities (bg-surface, text-ink-2, …) */
@@ -143,6 +151,8 @@
 
   --color-ok: var(--ok);
   --color-ok-soft: var(--ok-soft);
+  --color-done: var(--done);
+  --color-done-soft: var(--done-soft);
   --color-warn: var(--warn);
   --color-warn-soft: var(--warn-soft);
   --color-crit: var(--crit);
@@ -511,6 +521,11 @@ select.field {
   color: var(--ok);
   border-color: color-mix(in srgb, var(--ok) 40%, transparent);
 }
+.badge-done {
+  background: var(--done-soft);
+  color: var(--done);
+  border-color: color-mix(in srgb, var(--done) 40%, transparent);
+}
 .badge-warn {
   background: var(--warn-soft);
   color: var(--warn);
@@ -654,6 +669,17 @@ table.data tbody tr:hover {
 /* ===========================================================================
    Entrance motion — one orchestrated reveal, not scattered effects
    =========================================================================== */
+
+@keyframes caret {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
 
 @keyframes rise {
   from {

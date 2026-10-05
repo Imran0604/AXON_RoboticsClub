@@ -7,13 +7,12 @@ import { getDashboardStats } from "@/lib/queries";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "For judges",
+  title: "Reviewer guide",
   description:
-    "Every judging requirement mapped to the page that demonstrates it, with one-click logins for all three roles.",
+    "Every capability mapped to the page that demonstrates it, with one-click sign-in for all three roles.",
 };
 
 interface Requirement {
-  pts: number;
   need: string;
   how: string;
   href?: string;
@@ -22,59 +21,51 @@ interface Requirement {
 
 interface Section {
   title: string;
-  total: number;
   items: Requirement[];
 }
 
 /**
- * The rubric, reproduced with a deep link to the page that proves each line.
+ * A capability index with a deep link to the page that proves each line.
  *
- * This page exists because a judge with thirty submissions to score cannot go
- * hunting for features. Anything they can't find in the first minute may as
- * well not have been built.
+ * This page exists because nobody evaluating a project goes hunting for
+ * features. Anything that can't be found in the first minute may as well not
+ * have been built.
  */
 const SECTIONS: Section[] = [
   {
     title: "Fest Directory",
-    total: 30,
     items: [
       {
-        pts: 5,
         need: "Display available / upcoming fests",
         how: "Four fests grouped into Happening now, Upcoming and Past. Status is computed from the dates on every request, never stored, so it cannot go stale.",
         href: "/fests",
         linkLabel: "Open fest directory",
       },
       {
-        pts: 5,
         need: "Event cards contain useful information",
         how: "Each card carries category, date and time, venue, fee, team size, a live seats-remaining meter and a deadline countdown.",
         href: "/fests/axon-tech-carnival-2026",
         linkLabel: "See 8 event cards",
       },
       {
-        pts: 5,
         need: "Search events",
         how: "Debounced search across title, summary, description, category, venue and fest name. The query lives in the URL, so results are linkable.",
         href: "/events?q=drone",
         linkLabel: 'Search for "drone"',
       },
       {
-        pts: 5,
         need: "Event categories and filter",
         how: "Category chips with counts, plus fest, fee, solo/team and open-only filters and four sort orders. Filters compose and survive a reload.",
         href: "/events?category=Hardware&fee=free",
         linkLabel: "Hardware + free, combined",
       },
       {
-        pts: 5,
         need: "Event detail page showing deadline and capacity",
         how: "Opened from the fest directory. Shows a live countdown, a seats meter, rules, prize and the exact questions the form will ask.",
         href: "/events/line-follower-championship",
         linkLabel: "Open a full event page",
       },
       {
-        pts: 5,
         need: "General UX and responsiveness",
         how: "Three-state theme control (system / light / dark), skeleton and empty states, keyboard focus rings, reduced-motion support, and real mobile layouts rather than a squeezed desktop.",
       },
@@ -82,45 +73,38 @@ const SECTIONS: Section[] = [
   },
   {
     title: "Registration System",
-    total: 30,
     items: [
       {
-        pts: 5,
         need: "Users can register for an event",
         how: "Sign in with one click below, then register. Solo and team modes, with team mates added inline.",
         href: "/events/drone-obstacle-rally",
         linkLabel: "Register for an open event",
       },
       {
-        pts: 5,
         need: "Registration form works correctly",
         how: "The form is rendered from organiser-defined fields, not hardcoded. Validated on the client and again on the server, with per-field error messages.",
         href: "/events/robosoccer-5v5/register",
         linkLabel: "Open a 7-question form",
       },
       {
-        pts: 5,
         need: "Registration confirmation",
         how: "A confirmation screen plus a ticket with a unique code and a scannable QR pass that encodes the check-in URL.",
         href: "/me/registrations",
         linkLabel: "See issued tickets",
       },
       {
-        pts: 5,
         need: "Registration limits and deadlines work",
         how: "All three limits are enforced inside a transaction that locks the event row, so two requests for the last seat cannot both succeed. Arduino Bootcamp has a passed deadline; Line Follower is full at 40/40 and diverts to a waitlist.",
         href: "/events/arduino-bootcamp",
         linkLabel: "See a closed deadline",
       },
       {
-        pts: 5,
         need: "Users can view and manage their registration",
         how: "Grouped into upcoming, attended and cancelled. Cancelling frees the seat and promotes the first person off the waitlist in the same transaction.",
         href: "/me/registrations",
         linkLabel: "Open My registrations",
       },
       {
-        pts: 5,
         need: "General functionality",
         how: "No dead ends: every gate explains itself and offers a way forward, duplicate registration is caught by a database constraint, and the back button behaves.",
       },
@@ -128,45 +112,38 @@ const SECTIONS: Section[] = [
   },
   {
     title: "Organizer Management",
-    total: 30,
     items: [
       {
-        pts: 5,
         need: "Organizer / admin dashboard",
         how: "KPI tiles, a 30-day registration time series with a hover crosshair, a status breakdown and a list of events needing attention.",
         href: "/admin",
         linkLabel: "Open Mission Control",
       },
       {
-        pts: 5,
         need: "View registered participants",
         how: "Paginated table of all 470 registrations with contact details, team composition and every custom form answer in a collapsible panel.",
         href: "/admin/registrations",
         linkLabel: "Open participants table",
       },
       {
-        pts: 5,
         need: "Search and filter participants",
         how: "Search by name, email, phone, institution, ticket code or team name, plus status / fest / event filters and four sort orders. One click exports the current selection as CSV.",
         href: "/admin/registrations?status=waitlisted",
         linkLabel: "Filter to the waitlist",
       },
       {
-        pts: 5,
         need: "Manage participant registration status",
         how: "Approve, reject, waitlist, check in or reinstate — per row or in bulk across a selection. Every change writes an audit row.",
         href: "/admin/registrations?status=pending",
         linkLabel: "Approve a pending entry",
       },
       {
-        pts: 5,
         need: "Statistics and useful management tools",
         how: "An analytics page with registration velocity, category breakdown, a conversion funnel and capacity by event — plus the form builder and the QR check-in scanner.",
         href: "/admin/analytics",
         linkLabel: "Open analytics",
       },
       {
-        pts: 5,
         need: "Tool responsiveness",
         how: "The admin works on a phone: the participants table becomes cards under 768px, and the scanner is mobile-first by design because it is held at a door.",
         href: "/admin/scan",
@@ -224,15 +201,15 @@ export default async function JudgePage() {
         <div className="mx-auto w-full max-w-[72rem] px-5 py-11">
           <div className="flex items-center gap-2.5">
             <Logo size={32} />
-            <p className="eyebrow">For judges and reviewers</p>
+            <p className="eyebrow">Reviewer guide</p>
           </div>
           <h1 className="mt-5 max-w-3xl text-[2rem] font-extrabold leading-tight sm:text-[2.5rem]">
-            Every requirement, and the page that proves it.
+            Every capability, and the page that proves it.
           </h1>
           <p className="mt-4 max-w-2xl text-[1rem] leading-relaxed text-ink-2">
-            This page reproduces the judging rubric and links each line straight to the feature that
-            satisfies it. Sign in with one click below — all three roles, no credentials to type and
-            no email to verify.
+            Every capability in the platform, linked straight to the page that demonstrates it.
+            Sign in with one click below — all three roles, no credentials to type and no email to
+            verify.
           </p>
 
           <dl className="mt-8 flex flex-wrap gap-x-9 gap-y-4">
@@ -249,7 +226,7 @@ export default async function JudgePage() {
             ))}
           </dl>
           <p className="mt-3 text-[0.8125rem] text-ink-3">
-            All seeded before you arrived — nothing needs creating to evaluate any feature.
+            All seeded before you arrived — nothing needs creating to try any feature.
           </p>
         </div>
       </section>
@@ -264,14 +241,16 @@ export default async function JudgePage() {
             <section key={section.title}>
               <div className="flex flex-wrap items-baseline gap-3 border-b border-line pb-2.5">
                 <h2 className="text-[1.375rem] font-extrabold">{section.title}</h2>
-                <span className="badge badge-accent">{section.total} pts</span>
+                <span className="mono text-[0.75rem] text-ink-3">{section.items.length} capabilities</span>
               </div>
 
               <ol className="mt-4 flex flex-col gap-2.5">
                 {section.items.map((item) => (
                   <li key={item.need} className="card p-4">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
-                      <span className="badge badge-neutral mt-0.5 shrink-0">{item.pts} pts</span>
+                      <span className="mono mt-1 w-6 shrink-0 text-[0.6875rem] text-ink-3">
+                        {String(section.items.indexOf(item) + 1).padStart(2, "0")}
+                      </span>
 
                       <div className="min-w-0 flex-1">
                         <h3 className="text-[0.9375rem] font-bold">{item.need}</h3>
@@ -293,8 +272,8 @@ export default async function JudgePage() {
           {/* ------------------------------------------------------- bonus */}
           <section>
             <div className="flex flex-wrap items-baseline gap-3 border-b border-line pb-2.5">
-              <h2 className="text-[1.375rem] font-extrabold">Beyond the requirements</h2>
-              <span className="badge badge-accent">Bonus · 30 pts</span>
+              <h2 className="text-[1.375rem] font-extrabold">Beyond the basics</h2>
+              <span className="mono text-[0.75rem] text-ink-3">{BONUS.length} extras</span>
             </div>
 
             <div className="mt-4 grid gap-3 lg:grid-cols-2">
@@ -359,8 +338,9 @@ export default async function JudgePage() {
             >
               <p className="text-[0.875rem] leading-relaxed text-ink-2">
                 <strong className="font-semibold text-ink">Known limitations</strong> are listed
-                honestly in the README rather than hidden — transactional email, payment capture and
-                certificate generation are all out of scope for this build, and the README says so.
+                honestly in the README rather than hidden — transactional email, automated payment
+                verification and certificate generation are all out of scope for this build, and the
+                README says so.
               </p>
             </div>
           </section>

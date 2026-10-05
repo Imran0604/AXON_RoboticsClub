@@ -3,7 +3,7 @@ import Link from "next/link";
 /**
  * Empty states. Each one names what is missing and offers the single most
  * useful way out, rather than leaving a blank panel — the "general UX"
- * rubric lines are largely won in states like this one.
+ * impression of polish is largely won in states like this one.
  */
 export function Empty({
   title,

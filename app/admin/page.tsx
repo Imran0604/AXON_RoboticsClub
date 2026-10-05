@@ -53,7 +53,7 @@ export default async function AdminDashboard() {
             tone={stats.pending > 0 ? "warn" : "default"}
           />
           <StatTile label="Waitlisted" value={stats.waitlisted} sub="Queued for a place" />
-          <StatTile label="Checked in" value={stats.checked_in} sub="Scanned at a venue" tone="accent" />
+          <StatTile label="Checked in" value={stats.checked_in} sub="Scanned at a venue" tone="done" />
           <StatTile label="Fees collected" value={fmtFee(stats.revenue_bdt)} sub="Confirmed + checked in" />
         </div>
       </section>
@@ -83,7 +83,7 @@ export default async function AdminDashboard() {
               <StatusStrip
                 segments={[
                   { label: "Confirmed", value: stats.confirmed, color: "var(--ok)" },
-                  { label: "Checked in", value: stats.checked_in, color: "var(--accent)" },
+                  { label: "Checked in", value: stats.checked_in, color: "var(--done)" },
                   { label: "Pending", value: stats.pending, color: "var(--warn)" },
                   { label: "Waitlisted", value: stats.waitlisted, color: "var(--info)" },
                   { label: "Cancelled", value: stats.cancelled, color: "var(--ink-3)" },

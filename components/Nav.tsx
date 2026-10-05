@@ -15,7 +15,7 @@ export async function Nav() {
     { href: "/events", label: "Events" },
     ...(user ? [{ href: "/me/registrations", label: "My registrations" }] : []),
     ...(staff ? [{ href: "/admin", label: "Mission Control" }] : []),
-    { href: "/judge", label: "For judges" },
+    { href: "/judge", label: "Reviewer guide" },
   ];
 
   const authControls = user ? (

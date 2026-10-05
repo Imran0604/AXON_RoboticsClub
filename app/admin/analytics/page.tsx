@@ -113,7 +113,7 @@ export default async function AnalyticsPage() {
               <StatusStrip
                 segments={[
                   { label: "Confirmed", value: stats.confirmed, color: "var(--ok)" },
-                  { label: "Checked in", value: stats.checked_in, color: "var(--accent)" },
+                  { label: "Checked in", value: stats.checked_in, color: "var(--done)" },
                   { label: "Pending", value: stats.pending, color: "var(--warn)" },
                   { label: "Waitlisted", value: stats.waitlisted, color: "var(--info)" },
                   { label: "Cancelled", value: stats.cancelled, color: "var(--ink-3)" },

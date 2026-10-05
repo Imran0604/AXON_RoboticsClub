@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AXON Robotics Club",
     description:
-      "Browse fests, explore events and register — the club operations platform built for the 9th DRMC International Tech Carnival.",
+      "Browse fests, explore events and register in one place — the operations platform for the AXON Robotics Club.",
     type: "website",
     url: SITE,
   },
@@ -111,7 +111,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 <nav className="flex flex-col gap-2" aria-label="Project">
                   <span className="eyebrow">Project</span>
                   <Link href="/judge" className="text-[0.8125rem] text-ink-2 hover:text-ink">
-                    For judges
+                    Reviewer guide
                   </Link>
                   <a
                     href="https://github.com/Imran0604/AXON_RoboticsClub"
@@ -126,10 +126,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </div>
 
             <div className="mt-9 flex flex-col gap-2 border-t border-line pt-6 text-[0.75rem] text-ink-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="mono">
-                Built for the 9th DRMC International Tech Carnival 2026 · AI Web Development Contest
-              </p>
-              <p className="mono">MIT Licensed · Sample data is fictional</p>
+              <p className="mono">© 2026 AXON Robotics Club · Open source under MIT</p>
+              <p className="mono">Sample data is fictional</p>
             </div>
           </div>
         </footer>
